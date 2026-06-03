@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fieloop — Convierte clientes en fans</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --b:#12234F;--b2:#1A2E5A;--b3:#243666;--b4:rgba(18,35,79,0.06);
+  --w:#FAFCFF;--w2:rgba(250,252,255,0.92);--w3:#EEF3FD;--w4:#E0E8F8;
+  --o:#F97316;--od:#C2410C;--ob:rgba(249,115,22,0.1);--obr:rgba(249,115,22,0.22);
+  --txt:#12234F;--txt2:#3A4F7A;--txt3:#7A8BB0;
+  --fs:'Syne',sans-serif;--fb:'DM Sans',sans-serif;
+}
+body{background:var(--w);color:var(--txt);font-family:var(--fb);font-size:15px;line-height:1.6;overflow-x:hidden}
+nav{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px solid var(--b3);padding:0 5%;display:flex;justify-content:space-between;align-items:center;height:60px}
+.logo{display:inline-flex;align-items:center}
+.logo-txt{font-family:var(--fs);font-size:1.15rem;font-weight:800;color:var(--w);letter-spacing:-0.02em}
+.logo svg{width:44px;height:26px}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{font-size:13px;color:rgba(250,252,255,0.45);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:rgba(250,252,255,0.85)}
+.nav-cta{background:var(--o)!important;color:var(--w)!important;font-weight:500;padding:7px 18px;border-radius:3px;font-size:13px!important}
+.nav-cta:hover{background:var(--od)!important}
+.hero{background:var(--w);padding:5% 5% 4%;position:relative;overflow:hidden;min-height:88vh;display:flex;flex-direction:column;justify-content:center}
+.hero-deco{position:absolute;top:0;right:0;width:45%;height:100%;background:var(--w3);clip-path:polygon(12% 0,100% 0,100% 100%,0% 100%);opacity:0.5;pointer-events:none}
+.hero-deco2{position:absolute;top:0;right:0;width:44%;height:100%;background:var(--w4);clip-path:polygon(16% 0,100% 0,100% 100%,4% 100%);opacity:0.4;pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--o);border:1px solid var(--obr);padding:5px 14px;border-radius:2px;margin-bottom:2rem;width:fit-content;background:var(--ob)}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--o);animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
+.hero h1{font-family:var(--fs);font-size:clamp(2.6rem,5.5vw,4.8rem);font-weight:800;line-height:1.0;letter-spacing:-0.03em;max-width:640px;margin-bottom:1.5rem;color:var(--b)}
+.hero h1 em{font-style:normal;color:var(--o)}
+.hero-sub{font-size:1rem;color:var(--txt2);max-width:460px;font-weight:300;margin-bottom:2.5rem;line-height:1.75}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn-p{background:var(--o);color:var(--w);font-family:var(--fb);font-weight:500;font-size:14px;padding:12px 28px;border-radius:3px;border:none;cursor:pointer;transition:background 0.2s;text-decoration:none;display:inline-block}
+.btn-p:hover{background:var(--od)}
+.btn-s{background:transparent;color:var(--b);font-family:var(--fb);font-weight:400;font-size:14px;padding:12px 24px;border-radius:3px;border:1px solid var(--w4);cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block}
+.btn-s:hover{border-color:var(--b);color:var(--b)}
+.hero-proof{margin-top:3.5rem;display:flex;gap:3rem;flex-wrap:wrap;padding-top:2.5rem;border-top:1px solid var(--w4)}
+.proof-item .num{font-family:var(--fs);font-size:1.8rem;font-weight:800;color:var(--o);line-height:1}
+.proof-item .lbl{font-size:12px;color:var(--txt3);margin-top:3px}
+.sec-problema{background:var(--w);padding:5rem 5%;border-top:1px solid var(--w4)}
+.sec-tag{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--o);margin-bottom:0.8rem}
+.sec-h2{font-family:var(--fs);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin-bottom:1.2rem;color:var(--b)}
+.sec-h2 em{font-style:normal;color:var(--o)}
+.problema-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--w4);border:1px solid var(--w4);border-radius:6px;overflow:hidden;margin-top:2.5rem}
+.prob-card{background:var(--w);padding:2rem;position:relative}
+.prob-card::after{content:'✗';position:absolute;top:1.5rem;right:1.5rem;font-size:1rem;color:rgba(239,68,68,0.25)}
+.prob-icon{font-size:1.6rem;margin-bottom:0.8rem}
+.prob-card h3{font-family:var(--fs);font-size:0.9rem;font-weight:700;color:var(--b);margin-bottom:0.4rem}
+.prob-card p{font-size:13px;color:var(--txt3);line-height:1.6}
+.sec-como{background:var(--b);padding:5rem 5%}
+.sec-como .sec-tag{color:var(--o)}
+.sec-como .sec-h2{color:var(--w)}
+.sec-como .sec-h2 em{color:var(--o)}
+.sec-sub{color:rgba(250,252,255,0.5);font-weight:300;font-size:14px;max-width:460px;margin-bottom:2.5rem}
+.pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b3);border:1px solid var(--b3);border-radius:6px;overflow:hidden}
+.paso{background:var(--b2);padding:2.5rem 2rem;position:relative}
+.paso-n{font-family:var(--fs);font-size:2.8rem;font-weight:800;color:rgba(249,115,22,0.12);line-height:1;margin-bottom:1rem;-webkit-text-stroke:1px rgba(249,115,22,0.2)}
+.paso h3{font-family:var(--fs);font-size:0.95rem;font-weight:700;color:var(--w);margin-bottom:0.5rem}
+.paso p{font-size:13px;color:rgba(250,252,255,0.45);line-height:1.6}
+.paso-arr{position:absolute;top:50%;right:-1px;transform:translateY(-50%);width:20px;height:20px;background:var(--b);border:1px solid var(--b3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--o);z-index:2}
+.wallet-row{margin-top:2.5rem;display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
+.phone{width:188px;background:var(--b2);border:1px solid var(--b3);border-radius:26px;padding:14px 10px}
+.phone-notch{width:52px;height:5px;background:var(--b3);border-radius:3px;margin:0 auto 12px}
+.phone-lbl{font-size:9px;color:rgba(250,252,255,0.3);text-align:center;margin-bottom:8px;letter-spacing:0.1em;text-transform:uppercase}
+.w-card{background:var(--b);border:1px solid var(--b3);border-radius:12px;padding:12px;margin-bottom:6px;position:relative;overflow:hidden}
+.w-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--o)}
+.w-brand{font-size:8px;color:rgba(250,252,255,0.3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px}
+.w-name{font-family:var(--fs);font-size:12px;font-weight:700;color:var(--w);margin-bottom:8px}
+.w-sellos{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px}
+.sello{width:14px;height:14px;border-radius:50%;background:var(--o);display:flex;align-items:center;justify-content:center;font-size:7px;color:var(--w)}
+.sello.v{background:transparent;border:1px solid var(--b3)}
+.w-meta{font-size:8px;color:rgba(250,252,255,0.3)}
+.scan-btn{width:100%;background:var(--ob);border:1px solid var(--obr);border-radius:6px;padding:6px;text-align:center;font-size:9px;color:var(--o);font-weight:500;margin-top:4px}
+.sec-precios{background:var(--w3);padding:5rem 5%;border-top:1px solid var(--w4);border-bottom:1px solid var(--w4)}
+.precios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
+.p-card{background:var(--w);border:1px solid var(--w4);border-radius:6px;padding:2rem;position:relative;transition:box-shadow 0.2s}
+.p-card:hover{box-shadow:0 4px 24px rgba(18,35,79,0.08)}
+.p-card.feat{border-color:var(--o);border-width:1.5px}
+.feat-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--o);color:var(--w);font-size:10px;font-weight:700;font-family:var(--fs);letter-spacing:0.06em;padding:3px 14px;border-radius:2px;white-space:nowrap}
+.p-tier{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--o);margin-bottom:0.4rem}
+.p-precio{font-family:var(--fs);font-size:2.2rem;font-weight:800;color:var(--b);line-height:1;margin-bottom:0.1rem}
+.p-precio sup{font-size:1rem;vertical-align:super}
+.p-sub{font-size:12px;color:var(--txt3);margin-bottom:1.2rem}
+.p-meta{font-size:11px;color:#16A34A;margin-bottom:1rem;font-weight:500}
+.p-features{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:1.5rem}
+.p-features li{font-size:12.5px;color:var(--txt2);display:flex;gap:8px;align-items:flex-start;line-height:1.5}
+.p-features li::before{content:'✓';color:var(--o);flex-shrink:0;font-weight:700}
+.p-cta{width:100%;padding:10px;border-radius:3px;font-family:var(--fb);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s;border:1px solid var(--w4);background:transparent;color:var(--txt2)}
+.p-cta:hover{border-color:var(--o);color:var(--o)}
+.p-card.feat .p-cta{background:var(--o);color:var(--w);border-color:var(--o)}
+.p-card.feat .p-cta:hover{background:var(--od);border-color:var(--od)}
+.sec-ind{background:var(--w);padding:5rem 5%}
+.ind-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--w4);border:1px solid var(--w4);border-radius:6px;overflow:hidden;margin-top:2.5rem}
+.ind-item{background:var(--w);padding:1.5rem 1.2rem;transition:background 0.2s;cursor:pointer}
+.ind-item:hover{background:var(--w3)}
+.ind-emoji{font-size:1.6rem;margin-bottom:0.7rem}
+.ind-n{font-family:var(--fs);font-size:0.85rem;font-weight:700;color:var(--b);margin-bottom:0.3rem}
+.ind-type{display:inline-block;font-size:9px;color:var(--o);border:1px solid var(--obr);padding:2px 7px;border-radius:2px;margin-bottom:0.4rem;background:var(--ob)}
+.ind-d{font-size:11.5px;color:var(--txt3);line-height:1.5}
+.sec-contacto{background:var(--b);padding:5rem 5%}
+.sec-contacto .sec-tag{color:var(--o)}
+.sec-contacto .sec-h2{color:var(--w)}
+.sec-contacto .sec-h2 em{color:var(--o)}
+.contacto-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:2.5rem;align-items:start}
+.c-info h3{font-family:var(--fs);font-size:1.2rem;font-weight:700;color:var(--w);margin-bottom:0.8rem}
+.c-info p{font-size:14px;color:rgba(250,252,255,0.5);line-height:1.75;font-weight:300;margin-bottom:1.5rem}
+.c-puntos{list-style:none;display:flex;flex-direction:column;gap:10px}
+.c-puntos li{display:flex;gap:10px;font-size:13px;color:rgba(250,252,255,0.45)}
+.c-puntos li::before{content:'→';color:var(--o);flex-shrink:0}
+.c-form{background:var(--b2);border:1px solid var(--b3);border-radius:6px;padding:2rem}
+.f-group{margin-bottom:1.1rem}
+.f-group label{display:block;font-size:11px;font-weight:500;color:rgba(250,252,255,0.35);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px}
+.f-group input,.f-group select{width:100%;background:var(--b);border:1px solid var(--b3);border-radius:3px;padding:10px 14px;color:var(--w);font-family:var(--fb);font-size:14px;outline:none;transition:border-color 0.2s}
+.f-group input:focus,.f-group select:focus{border-color:var(--o)}
+.f-group input::placeholder{color:rgba(250,252,255,0.2)}
+.f-group select option{background:var(--b2)}
+.f-submit{width:100%;background:var(--o);color:var(--w);font-family:var(--fb);font-size:14px;font-weight:500;padding:12px;border-radius:3px;border:none;cursor:pointer;transition:background 0.2s;margin-top:0.5rem}
+.f-submit:hover{background:var(--od)}
+.wa-btn{display:flex;align-items:center;gap:8px;margin-top:1rem;padding:10px 14px;background:rgba(37,211,102,0.06);border:1px solid rgba(37,211,102,0.15);border-radius:3px;font-size:13px;color:rgba(37,211,102,0.8);text-decoration:none}
+footer{background:var(--b2);border-top:1px solid var(--b3);padding:1.5rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.f-logo{display:inline-flex;align-items:center}
+.f-logo-txt{font-family:var(--fs);font-size:0.9rem;font-weight:800;color:var(--w)}
+footer p{font-size:12px;color:rgba(250,252,255,0.25)}
+@media(max-width:720px){
+  .problema-grid,.pasos,.precios-grid,.contacto-wrap{grid-template-columns:1fr}
+  .ind-grid{grid-template-columns:1fr 1fr}
+  .paso-arr{display:none}
+  .hero h1{font-size:2.2rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <span class="logo-txt">fiel</span>
+    <svg viewBox="0 0 52 32"><path d="M8 16 C8 8,18 8,26 16 C34 24,44 24,44 16 C44 8,34 8,26 16 C18 24,8 24,8 16 Z" fill="none" stroke="#F97316" stroke-width="2.5"/><circle cx="13" cy="16" r="4" fill="#FAFCFF"/><circle cx="39" cy="16" r="4" fill="#F97316"/></svg>
+    <span class="logo-txt">p</span>
+  </div>
+  <div class="nav-links">
+    <a href="#como">Cómo funciona</a>
+    <a href="#precios">Precios</a>
+    <a href="#contacto" class="nav-cta">Demo gratis</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-deco"></div>
+  <div class="hero-deco2"></div>
+  <div class="hero-tag">Lealtad digital para negocios locales</div>
+  <h1>Convierte clientes<br>en <em>fans.</em></h1>
+  <p class="hero-sub">Sin tarjetas de papel que se pierden. Sin apps que nadie instala. Tu programa de lealtad viviendo en Apple Wallet y Google Wallet — donde tu cliente siempre lleva su celular.</p>
+  <div class="hero-actions">
+    <a href="#contacto" class="btn-p">Quiero mi demo gratis</a>
+    <a href="#como" class="btn-s">Ver cómo funciona →</a>
+  </div>
+  <div class="hero-proof">
+    <div class="proof-item"><div class="num">95%+</div><div class="lbl">de celulares compatibles</div></div>
+    <div class="proof-item"><div class="num">3 min</div><div class="lbl">para dar un sello</div></div>
+    <div class="proof-item"><div class="num">$0</div><div class="lbl">costo para tu cliente</div></div>
+    <div class="proof-item"><div class="num">1er mes</div><div class="lbl">completamente gratis</div></div>
+  </div>
+</section>
+
+<section class="sec-problema">
+  <div class="sec-tag">El problema</div>
+  <h2 class="sec-h2">Las tarjetas de papel<br><em>no funcionan.</em></h2>
+  <p style="color:var(--txt2);max-width:500px;font-weight:300;font-size:14px">Tu cliente las pierde, las olvida o simplemente no las carga. Y tú no sabes nada de quién regresa y quién no.</p>
+  <div class="problema-grid">
+    <div class="prob-card">
+      <div class="prob-icon">📄</div>
+      <h3>Se pierden constantemente</h3>
+      <p>El 60% de las tarjetas de papel nunca se canjean. Tu cliente las tira, las lava o no las encuentra cuando las necesita.</p>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon">📊</div>
+      <h3>No generan ningún dato</h3>
+      <p>¿Cuántos clientes regresan? ¿Con qué frecuencia? ¿Cuándo vienen? Con papel, no tienes ninguna respuesta.</p>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon">🖨️</div>
+      <h3>Costo constante de impresión</h3>
+      <p>Cada lote es un gasto. Cada rediseño, otro gasto. Un programa digital no cuesta nada adicional por cliente nuevo.</p>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon">🔇</div>
+      <h3>No puedes comunicarte</h3>
+      <p>Con papel no puedes avisarle de una promo, recordarle que le falta un sello o felicitarlo en su cumpleaños.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec-como" id="como">
+  <div class="sec-tag">Cómo funciona</div>
+  <h2 class="sec-h2">Simple para ti.<br><em>Mágico para tu cliente.</em></h2>
+  <p class="sec-sub">En menos de 48 horas tu programa ya está activo y funcionando.</p>
+  <div class="pasos">
+    <div class="paso">
+      <div class="paso-n">01</div>
+      <h3>Configuras tu tarjeta</h3>
+      <p>Defines la promoción, cuántos sellos necesita tu cliente y los colores de tu marca. Listo en 30 minutos.</p>
+      <div class="paso-arr">→</div>
+    </div>
+    <div class="paso">
+      <div class="paso-n">02</div>
+      <h3>Tu cliente la guarda</h3>
+      <p>Escanea un QR o recibe un link. Con un tap queda en su Apple Wallet o Google Wallet. Sin instalar nada.</p>
+      <div class="paso-arr">→</div>
+    </div>
+    <div class="paso">
+      <div class="paso-n">03</div>
+      <h3>El empleado escanea</h3>
+      <p>Desde cualquier navegador, sin app ni hardware. El sello se registra en tiempo real y la tarjeta se actualiza.</p>
+    </div>
+  </div>
+  <div class="wallet-row">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-lbl">Apple Wallet</div>
+      <div class="w-card">
+        <div class="w-brand">Café Ejemplo</div>
+        <div class="w-name">Tarjeta Frecuente</div>
+        <div class="w-sellos">
+          <div class="sello">✓</div><div class="sello">✓</div><div class="sello">✓</div><div class="sello">✓</div><div class="sello">✓</div><div class="sello">✓</div>
+          <div class="sello v"></div><div class="sello v"></div><div class="sello v"></div><div class="sello v"></div>
+        </div>
+        <div class="w-meta">6 de 10 · Falta 1 café para tu gratis</div>
+      </div>
+      <div class="scan-btn">Mostrar al empleado</div>
+    </div>
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-lbl">Google Wallet</div>
+      <div class="w-card">
+        <div class="w-brand">Barbería Premium</div>
+        <div class="w-name">Club de Miembros</div>
+        <div class="w-sellos">
+          <div class="sello">✓</div><div class="sello">✓</div><div class="sello">✓</div>
+          <div class="sello v"></div><div class="sello v"></div>
+        </div>
+        <div class="w-meta">3 de 5 · Próxima visita: −20%</div>
+      </div>
+      <div class="scan-btn">Mostrar al empleado</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-precios" id="precios">
+  <div class="sec-tag">Planes</div>
+  <h2 class="sec-h2">Elige según<br><em>tu meta.</em></h2>
+  <p style="color:var(--txt2);font-weight:300;font-size:14px;max-width:420px">Primer mes completamente gratis. Sin contratos anuales. Cancela cuando quieras.</p>
+  <div class="precios-grid">
+    <div class="p-card">
+      <div class="p-tier">Frecuencia</div>
+      <div class="p-precio"><sup>$</sup>499</div>
+      <div class="p-sub">MXN/mes + IVA</div>
+      <div class="p-meta">Para arrancar sin riesgo</div>
+      <ul class="p-features">
+        <li>1 tarjeta activa (punch card)</li>
+        <li>Hasta 500 clientes activos</li>
+        <li>Scanner para 2 empleados</li>
+        <li>Dashboard básico de visitas</li>
+        <li>Diseño con tu logo y colores</li>
+        <li>Soporte vía WhatsApp</li>
+      </ul>
+      <button class="p-cta">Empezar gratis</button>
+    </div>
+    <div class="p-card feat">
+      <div class="feat-badge">★ MÁS POPULAR</div>
+      <div class="p-tier">Lealtad</div>
+      <div class="p-precio"><sup>$</sup>899</div>
+      <div class="p-sub">MXN/mes + IVA</div>
+      <div class="p-meta">Para negocios que quieren crecer</div>
+      <ul class="p-features">
+        <li>3 tipos de tarjeta simultánea</li>
+        <li>Clientes ilimitados</li>
+        <li>Scanner para 5 empleados</li>
+        <li>1 sucursal adicional incluida</li>
+        <li>Push notifications + geo-fenced</li>
+        <li>Analytics: frecuencia y hora pico</li>
+        <li>Onboarding de 1 hora incluido</li>
+      </ul>
+      <button class="p-cta">Empezar gratis</button>
+    </div>
+    <div class="p-card">
+      <div class="p-tier">Crecimiento</div>
+      <div class="p-precio"><sup>$</sup>1,599</div>
+      <div class="p-sub">MXN/mes + IVA</div>
+      <div class="p-meta">Para cadenas y múltiples sucursales</div>
+      <ul class="p-features">
+        <li>5 tipos de tarjeta activa</li>
+        <li>Hasta 5 sucursales</li>
+        <li>Empleados ilimitados</li>
+        <li>Automatización con IA</li>
+        <li>RFM: detecta clientes en riesgo</li>
+        <li>Reportes mensuales automáticos</li>
+        <li>Revisión mensual de resultados</li>
+      </ul>
+      <button class="p-cta">Empezar gratis</button>
+    </div>
+  </div>
+</section>
+
+<section class="sec-ind">
+  <div class="sec-tag">Casos de uso</div>
+  <h2 class="sec-h2">Para cualquier negocio<br><em>que vive de sus clientes.</em></h2>
+  <div class="ind-grid">
+    <div class="ind-item">
+      <div class="ind-emoji">☕</div>
+      <div class="ind-n">Cafeterías</div>
+      <div class="ind-type">Punch card</div>
+      <div class="ind-d">Compra diaria, ticket bajo. El sello es el driver natural de regreso.</div>
+    </div>
+    <div class="ind-item">
+      <div class="ind-emoji">🍽️</div>
+      <div class="ind-n">Restaurantes</div>
+      <div class="ind-type">Cashback</div>
+      <div class="ind-d">Ticket alto. El cliente acumula valor monetario real en cada visita.</div>
+    </div>
+    <div class="ind-item">
+      <div class="ind-emoji">✂️</div>
+      <div class="ind-n">Salones de belleza</div>
+      <div class="ind-type">Membership</div>
+      <div class="ind-d">Servicio periódico. Genera compromiso de regreso natural.</div>
+    </div>
+    <div class="ind-item">
+      <div class="ind-emoji">💈</div>
+      <div class="ind-n">Barberías</div>
+      <div class="ind-type">Punch + Referral</div>
+      <div class="ind-d">Base masculina muy referenciable. Cada cliente trae amigos.</div>
+    </div>
+    <div class="ind-item">
+      <div class="ind-emoji">🏪</div>
+      <div class="ind-n">Retail local</div>
+      <div class="ind-type">Reward con tiers</div>
+      <div class="ind-d">Niveles cliente regular vs VIP que premian la fidelidad.</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-contacto" id="contacto">
+  <div class="sec-tag">Empezar</div>
+  <h2 class="sec-h2">Tu primer mes<br><em>es gratis.</em></h2>
+  <div class="contacto-wrap">
+    <div class="c-info">
+      <h3>Sin riesgo, sin letra chica.</h3>
+      <p>Configuro tu tarjeta de lealtad personalizada, te doy una sesión de onboarding de 1 hora y en 48 horas tu programa ya está funcionando. Si después del primer mes no ves resultados, no me debes nada.</p>
+      <ul class="c-puntos">
+        <li>Configuración completa incluida en el primer mes</li>
+        <li>Tarjeta con los colores y logo de tu negocio</li>
+        <li>Soporte directo vía WhatsApp</li>
+        <li>Sin contratos anuales en planes básicos</li>
+      </ul>
+    </div>
+    <div class="c-form">
+      <div class="f-group">
+        <label>Tu nombre</label>
+        <input type="text" placeholder="Ej: Carlos Ramírez">
+      </div>
+      <div class="f-group">
+        <label>Tipo de negocio</label>
+        <select>
+          <option value="">Selecciona...</option>
+          <option>Cafetería / Coffee shop</option>
+          <option>Restaurante casual</option>
+          <option>Barbería / Salón de belleza</option>
+          <option>Retail / Tienda</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="f-group">
+        <label>WhatsApp</label>
+        <input type="tel" placeholder="+52 81 XXXX XXXX">
+      </div>
+      <button class="f-submit">Quiero mi demo gratis →</button>
+      <a href="#" class="wa-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        O escríbeme directo por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">
+    <span class="f-logo-txt">fiel</span>
+    <svg width="38" height="22" viewBox="0 0 52 32"><path d="M8 16 C8 8,18 8,26 16 C34 24,44 24,44 16 C44 8,34 8,26 16 C18 24,8 24,8 16 Z" fill="none" stroke="#F97316" stroke-width="2.5"/><circle cx="13" cy="16" r="4" fill="#FAFCFF"/><circle cx="39" cy="16" r="4" fill="#F97316"/></svg>
+    <span class="f-logo-txt">p</span>
+  </div>
+  <p>Lealtad digital para negocios locales · Monterrey, México</p>
+  <p>© 2026 · Todos los derechos reservados</p>
+</footer>
+
+</body>
+</html>
