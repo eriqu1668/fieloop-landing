@@ -126,10 +126,10 @@ footer{background:var(--b2);border-top:1px solid var(--b3);padding:1.5rem 5%;dis
 .f-logo-txt{font-family:var(--fs);font-size:0.9rem;font-weight:800;color:var(--w)}
 footer p{font-size:12px;color:rgba(250,252,255,0.25)}
 .carousel-dots{display:none;justify-content:center;align-items:center;gap:8px;margin:1rem 0 1.5rem}
-.dot{width:9px;height:9px;border-radius:50%;background:#B0BDD6;transition:background 0.2s,transform 0.2s;flex-shrink:0}
+.dot{width:9px;height:9px;border-radius:50%;background:#B0BDD6;transition:background 0.2s,transform 0.2s;flex-shrink:0;display:inline-block}
 .dot.active{background:#F97316;transform:scale(1.2)}
-.dot-star{width:auto;height:auto;border-radius:0;background:transparent;font-size:11px;line-height:1;color:#B0BDD6;display:flex;align-items:center;justify-content:center;transform:none}
-.dot-star.active{background:transparent;color:#F97316;transform:scale(1.2)}
+.dot-star{width:20px;height:20px;border-radius:0;background:transparent;font-size:20px;line-height:1;color:#B0BDD6;display:inline-flex;align-items:center;justify-content:center;transform:none;flex-shrink:0}
+.dot-star.active{background:transparent;color:#F97316}
 @media(max-width:768px){
   .carousel-dots{display:flex}
 }
