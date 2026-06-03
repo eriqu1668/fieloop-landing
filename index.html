@@ -128,6 +128,8 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
 .carousel-dots{display:none;justify-content:center;gap:6px;margin:0.5rem 0 1.5rem}
 .dot{width:6px;height:6px;border-radius:50%;background:#E0E8F8;transition:background 0.2s}
 .dot.active{background:#F97316}
+.dot-star{width:auto;height:auto;border-radius:0;background:transparent;font-size:8px;line-height:1;color:#E0E8F8;display:flex;align-items:center;justify-content:center}
+.dot-star.active{background:transparent;color:#F97316}
 @media(max-width:768px){
   .carousel-dots{display:flex}
 }
@@ -336,8 +338,8 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
     </div>
   </div>
   <div class="carousel-dots" id="precio-dots">
-    <span class="dot active"></span>
     <span class="dot"></span>
+    <span class="dot dot-star">★</span>
     <span class="dot"></span>
   </div>
 </section>
