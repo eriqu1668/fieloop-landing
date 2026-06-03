@@ -125,16 +125,27 @@ footer{background:var(--b2);border-top:1px solid var(--b3);padding:1.5rem 5%;dis
 .f-logo{display:inline-flex;align-items:center}
 .f-logo-txt{font-family:var(--fs);font-size:0.9rem;font-weight:800;color:var(--w)}
 footer p{font-size:12px;color:rgba(250,252,255,0.25)}
+.carousel-dots{display:none;justify-content:center;gap:6px;margin:0.5rem 0 1.5rem}
+.dot{width:6px;height:6px;border-radius:50%;background:#E0E8F8;transition:background 0.2s}
+.dot.active{background:#F97316}
+@media(max-width:768px){
+  .carousel-dots{display:flex}
+}
 @media(max-width:768px){
   .nav-links a:not(.nav-cta){display:none}
   .hero{padding:3rem 5% 2.5rem;min-height:auto}
   .hero h1{font-size:2.2rem;word-break:break-word}
   .hero-actions{flex-direction:column}
   .btn-p,.btn-s{width:100%;text-align:center;box-sizing:border-box}
-  .problema-grid,.pasos,.contacto-wrap{grid-template-columns:1fr}
-  .precios-grid{grid-template-columns:1fr;max-width:360px;margin-left:auto;margin-right:auto}
+  .problema-grid,.contacto-wrap{grid-template-columns:1fr}
   .ind-grid{grid-template-columns:1fr 1fr}
   .paso-arr{display:none}
+  .pasos{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:1rem;padding-bottom:1rem;grid-template-columns:unset}
+  .pasos::-webkit-scrollbar{display:none}
+  .paso{min-width:80vw;scroll-snap-align:center;flex-shrink:0}
+  .precios-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:1rem;padding-bottom:1rem;grid-template-columns:unset;max-width:unset}
+  .precios-grid::-webkit-scrollbar{display:none}
+  .p-card{min-width:80vw;scroll-snap-align:center;flex-shrink:0}
 }
 @media(max-width:600px){
   .hero-deco{width:100%;height:100%;clip-path:none;opacity:0.25;z-index:0}
@@ -227,6 +238,11 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
       <p>Desde cualquier navegador, sin app ni hardware. El sello se registra en tiempo real y la tarjeta se actualiza.</p>
     </div>
   </div>
+  <div class="carousel-dots" id="paso-dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
   <div class="wallet-row">
     <div class="phone">
       <div class="phone-notch"></div>
@@ -312,6 +328,11 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
       </ul>
       <button class="p-cta">Empezar gratis</button>
     </div>
+  </div>
+  <div class="carousel-dots" id="precio-dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
   </div>
 </section>
 
@@ -405,5 +426,23 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
   <p>© 2026 · Todos los derechos reservados</p>
 </footer>
 
+<script>
+const pasos = document.querySelector('.pasos');
+const dots = document.querySelectorAll('#paso-dots .dot');
+if(pasos && dots.length) {
+  pasos.addEventListener('scroll', () => {
+    const index = Math.round(pasos.scrollLeft / pasos.offsetWidth);
+    dots.forEach((d,i) => d.classList.toggle('active', i === index));
+  });
+}
+const preciosGrid = document.querySelector('.precios-grid');
+const pDots = document.querySelectorAll('#precio-dots .dot');
+if(preciosGrid && pDots.length) {
+  preciosGrid.addEventListener('scroll', () => {
+    const index = Math.round(preciosGrid.scrollLeft / preciosGrid.offsetWidth);
+    pDots.forEach((d,i) => d.classList.toggle('active', i === index));
+  });
+}
+</script>
 </body>
 </html>
