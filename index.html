@@ -255,29 +255,13 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
     <div class="phone">
       <div class="phone-notch"></div>
       <div class="phone-lbl">Apple Wallet</div>
-      <div class="w-card">
-        <div class="w-brand">Café Ejemplo</div>
-        <div class="w-name">Tarjeta Frecuente</div>
-        <div class="w-sellos">
-          <div class="sello">✓</div><div class="sello">✓</div><div class="sello">✓</div><div class="sello">✓</div><div class="sello">✓</div><div class="sello">✓</div>
-          <div class="sello v"></div><div class="sello v"></div><div class="sello v"></div><div class="sello v"></div>
-        </div>
-        <div class="w-meta">6 de 10 · Falta 1 café para tu gratis</div>
-      </div>
+      <div class="w-card" id="card-left"></div>
       <div class="scan-btn">Mostrar al empleado</div>
     </div>
     <div class="phone">
       <div class="phone-notch"></div>
       <div class="phone-lbl">Google Wallet</div>
-      <div class="w-card">
-        <div class="w-brand">Barbería Premium</div>
-        <div class="w-name">Club de Miembros</div>
-        <div class="w-sellos">
-          <div class="sello">✓</div><div class="sello">✓</div><div class="sello">✓</div>
-          <div class="sello v"></div><div class="sello v"></div>
-        </div>
-        <div class="w-meta">3 de 5 · Próxima visita: −20%</div>
-      </div>
+      <div class="w-card" id="card-right"></div>
       <div class="scan-btn">Mostrar al empleado</div>
     </div>
   </div>
@@ -450,6 +434,68 @@ if(preciosGrid && pDots.length) {
     const index = Math.round(preciosGrid.scrollLeft / preciosGrid.offsetWidth);
     pDots.forEach((d,i) => d.classList.toggle('active', i === index));
   });
+}
+
+// Wallet slideshow
+const walletBiz = [
+  {
+    name:'Brew & Co', card:'Tarjeta Frecuente', total:8, done:5,
+    icon:(f,s)=>`<svg width="12" height="12" viewBox="0 0 24 24" fill="${f}" stroke="${s}" stroke-width="2"><ellipse cx="12" cy="12" rx="7" ry="10"/><path d="M12 2c0 0 4 4 4 10s-4 10-4 10"/></svg>`,
+    meta:(d,t)=>`${d} de ${t} · Falta 1 café para tu gratis`
+  },
+  {
+    name:'The Barber Room', card:'Club de Cortes', total:6, done:4,
+    icon:(f,s)=>`<svg width="12" height="12" viewBox="0 0 24 24" fill="${f}" stroke="${s}" stroke-width="2"><rect x="8" y="2" width="8" height="20" rx="4"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="14" x2="16" y2="14"/></svg>`,
+    meta:(d,t)=>`${d} de ${t} · Próximo corte con descuento`
+  },
+  {
+    name:'Mesa 14', card:'Mesa VIP', total:10, done:7,
+    icon:(f,s)=>`<svg width="12" height="12" viewBox="0 0 24 24" fill="${f}" stroke="${s}" stroke-width="2" stroke-linecap="round"><line x1="8" y1="2" x2="8" y2="22"/><path d="M6 2v6a2 2 0 0 0 4 0V2"/><line x1="16" y1="2" x2="16" y2="22"/></svg>`,
+    meta:(d,t)=>`${d} de ${t} · Acumula y gana un platillo gratis`
+  },
+  {
+    name:'Gloss Studio', card:'Beauty Card', total:5, done:2,
+    icon:(f,s)=>`<svg width="12" height="12" viewBox="0 0 24 24" fill="${f}" stroke="${s}" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>`,
+    meta:(d,t)=>`${d} de ${t} · Tu próximo servicio tiene regalo`
+  },
+  {
+    name:'Urban Store', card:'Loyalty Card', total:8, done:6,
+    icon:(f,s)=>`<svg width="12" height="12" viewBox="0 0 24 24" fill="${f}" stroke="${s}" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`,
+    meta:(d,t)=>`${d} de ${t} · Canjea tu recompensa pronto`
+  }
+];
+const leftSeq=[0,2,4], rightSeq=[1,3];
+let wStep=0;
+
+function renderWCard(b){
+  let s='';
+  for(let i=0;i<b.total;i++){
+    s+=i<b.done
+      ?`<div class="sello">${b.icon('#F97316','#F97316')}</div>`
+      :`<div class="sello v">${b.icon('transparent','rgba(250,252,255,0.3)')}</div>`;
+  }
+  return `<div class="w-brand">${b.name}</div><div class="w-name">${b.card}</div><div class="w-sellos">${s}</div><div class="w-meta">${b.meta(b.done,b.total)}</div>`;
+}
+
+const cardL=document.getElementById('card-left');
+const cardR=document.getElementById('card-right');
+if(cardL&&cardR){
+  cardL.style.transition='opacity 0.5s ease';
+  cardR.style.transition='opacity 0.5s ease';
+  cardL.innerHTML=renderWCard(walletBiz[leftSeq[0]]);
+  cardR.innerHTML=renderWCard(walletBiz[rightSeq[0]]);
+  wStep=1;
+  setInterval(()=>{
+    cardL.style.opacity='0';
+    cardR.style.opacity='0';
+    setTimeout(()=>{
+      cardL.innerHTML=renderWCard(walletBiz[leftSeq[wStep%leftSeq.length]]);
+      cardR.innerHTML=renderWCard(walletBiz[rightSeq[wStep%rightSeq.length]]);
+      cardL.style.opacity='1';
+      cardR.style.opacity='1';
+      wStep++;
+    },500);
+  },3000);
 }
 </script>
 </body>
