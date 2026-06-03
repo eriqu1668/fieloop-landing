@@ -140,9 +140,9 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
   .problema-grid,.contacto-wrap{grid-template-columns:1fr}
   .ind-grid{grid-template-columns:1fr 1fr}
   .paso-arr{display:none}
-  .pasos{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:1rem;padding-bottom:1rem;grid-template-columns:unset}
+  .pasos{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:1rem;padding:0 5% 1rem;grid-template-columns:unset;margin-left:-5%;margin-right:-5%}
   .pasos::-webkit-scrollbar{display:none}
-  .paso{min-width:80vw;scroll-snap-align:center;flex-shrink:0}
+  .paso{min-width:calc(90vw - 2rem);max-width:calc(90vw - 2rem);scroll-snap-align:start;flex-shrink:0;height:auto;overflow:visible}
   .precios-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:1rem;padding-bottom:1rem;grid-template-columns:unset;max-width:unset}
   .precios-grid::-webkit-scrollbar{display:none}
   .p-card{min-width:80vw;scroll-snap-align:center;flex-shrink:0}
