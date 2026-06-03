@@ -97,7 +97,7 @@ nav{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px soli
 .ind-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--w4);border:1px solid var(--w4);border-radius:6px;overflow:hidden;margin-top:2.5rem}
 .ind-item{background:var(--w);padding:1.5rem 1.2rem;transition:background 0.2s;cursor:pointer}
 .ind-item:hover{background:var(--w3)}
-.ind-emoji{font-size:1.6rem;margin-bottom:0.7rem}
+.ind-emoji{width:32px;height:32px;margin-bottom:0.8rem;display:block}
 .ind-n{font-family:var(--fs);font-size:0.85rem;font-weight:700;color:var(--b);margin-bottom:0.3rem}
 .ind-type{display:inline-block;font-size:9px;color:var(--o);border:1px solid var(--obr);padding:2px 7px;border-radius:2px;margin-bottom:0.4rem;background:var(--ob)}
 .ind-d{font-size:11.5px;color:var(--txt3);line-height:1.5}
@@ -138,7 +138,8 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
   .hero-actions{flex-direction:column}
   .btn-p,.btn-s{width:100%;text-align:center;box-sizing:border-box}
   .problema-grid,.contacto-wrap{grid-template-columns:1fr}
-  .ind-grid{grid-template-columns:1fr 1fr}
+  .ind-grid{display:grid;grid-template-columns:1fr 1fr}
+  .ind-item:last-child{grid-column:1 / -1;max-width:50%;margin:0 auto;width:100%}
   .paso-arr{display:none}
   .pasos{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:1rem;padding:0 5% 1rem;grid-template-columns:unset;margin-left:-5%;margin-right:-5%}
   .pasos::-webkit-scrollbar{display:none}
@@ -343,31 +344,31 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
   <h2 class="sec-h2">Para cualquier negocio<br><em>que vive de sus clientes.</em></h2>
   <div class="ind-grid">
     <div class="ind-item">
-      <div class="ind-emoji">☕</div>
+      <div class="ind-emoji"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg></div>
       <div class="ind-n">Cafeterías</div>
       <div class="ind-type">Punch card</div>
       <div class="ind-d">Compra diaria, ticket bajo. El sello es el driver natural de regreso.</div>
     </div>
     <div class="ind-item">
-      <div class="ind-emoji">🍽️</div>
+      <div class="ind-emoji"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg></div>
       <div class="ind-n">Restaurantes</div>
       <div class="ind-type">Cashback</div>
       <div class="ind-d">Ticket alto. El cliente acumula valor monetario real en cada visita.</div>
     </div>
     <div class="ind-item">
-      <div class="ind-emoji">✂️</div>
+      <div class="ind-emoji"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
       <div class="ind-n">Salones de belleza</div>
       <div class="ind-type">Membership</div>
       <div class="ind-d">Servicio periódico. Genera compromiso de regreso natural.</div>
     </div>
     <div class="ind-item">
-      <div class="ind-emoji">💈</div>
+      <div class="ind-emoji"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></div>
       <div class="ind-n">Barberías</div>
       <div class="ind-type">Punch + Referral</div>
       <div class="ind-d">Base masculina muy referenciable. Cada cliente trae amigos.</div>
     </div>
     <div class="ind-item">
-      <div class="ind-emoji">🏪</div>
+      <div class="ind-emoji"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
       <div class="ind-n">Retail local</div>
       <div class="ind-type">Reward con tiers</div>
       <div class="ind-d">Niveles cliente regular vs VIP que premian la fidelidad.</div>
