@@ -24,16 +24,57 @@ nav{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px soli
 .nav-links a:hover{color:rgba(250,252,255,0.85)}
 .nav-cta{background:var(--o)!important;color:var(--w)!important;font-weight:500;padding:7px 18px;border-radius:3px;font-size:13px!important}
 .nav-cta:hover{background:var(--od)!important}
-.hero{background:var(--w);padding:5% 5% 4%;position:relative;overflow:hidden;min-height:88vh;display:flex;flex-direction:column;justify-content:center}
-.hero-deco{position:absolute;top:0;right:0;width:45%;height:100%;background:var(--w3);clip-path:polygon(12% 0,100% 0,100% 100%,0% 100%);opacity:0.5;pointer-events:none}
-.hero-deco2{position:absolute;top:0;right:0;width:44%;height:100%;background:var(--w4);clip-path:polygon(16% 0,100% 0,100% 100%,4% 100%);opacity:0.4;pointer-events:none}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--o);border:1px solid var(--obr);padding:5px 14px;border-radius:2px;margin-bottom:2rem;width:fit-content;background:var(--ob)}
-.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--o);animation:pulse 2s infinite;flex-shrink:0}
+.hero{background:linear-gradient(135deg,#F5F0E8,#EEE8DC,#F2EDE3);padding:5% 5%;min-height:88vh;display:flex;align-items:center;border-top:none}
+.hero-deco,.hero-deco2{display:none}
+.hero-inner{display:grid;grid-template-columns:1fr auto auto;gap:3rem;align-items:center;width:100%;position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--o);border:1px solid var(--obr);padding:5px 14px;border-radius:2px;margin-bottom:1.5rem;background:var(--ob)}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--o);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
-.hero h1{font-family:var(--fs);font-size:clamp(2.6rem,5.5vw,4.8rem);font-weight:800;line-height:1.0;letter-spacing:-0.03em;max-width:640px;margin-bottom:1.5rem;color:var(--b)}
-.hero h1 em{font-style:normal;color:var(--o)}
-.hero-sub{font-size:1rem;color:var(--txt2);max-width:460px;font-weight:300;margin-bottom:2.5rem;line-height:1.75}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.hero-h1{font-family:var(--fs);font-size:clamp(2.2rem,4.5vw,4rem);font-weight:800;line-height:1.0;letter-spacing:-0.03em;color:var(--b);margin-bottom:1.2rem}
+.hero-h1 em{font-style:normal;color:var(--o)}
+.hero-sub{font-size:1rem;color:var(--txt2);max-width:420px;font-weight:300;margin-bottom:1.5rem;line-height:1.75}
+.hero-btn{display:inline-block;margin-bottom:0.75rem}
+.hero-note{font-size:12px;color:var(--txt3);margin-bottom:2rem;font-weight:300}
+.hero-proof{margin-top:0;display:flex;gap:2rem;flex-wrap:wrap;padding-top:1.5rem;border-top:1px solid rgba(18,35,79,0.1)}
+.hero-phones{display:flex;gap:1.5rem;align-items:center}
+.hero-iphone{position:relative}
+.iph-frame{background:linear-gradient(180deg,#3C3C3C,#1C1C1C);border-radius:44px;padding:3px;box-shadow:inset 0 0 0 0.5px rgba(255,255,255,0.1),0 0 0 0.5px rgba(0,0,0,0.8);width:185px}
+.iph-inner{background:#000;border-radius:42px;overflow:hidden}
+.iph-screen{background:#F2F2F7;min-height:380px;position:relative;overflow:hidden}
+.iph-island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:52px;height:14px;background:#000;border-radius:20px;z-index:10}
+.iph-wallet-nav{display:flex;justify-content:space-between;align-items:center;padding:32px 16px 8px}
+.iph-wallet-title{font-size:26px;font-weight:700;color:#000;letter-spacing:-0.5px}
+.iph-wallet-plus{width:26px;height:26px;border-radius:50%;background:#E5E5EA;display:flex;align-items:center;justify-content:center;font-size:16px;color:#000}
+.iph-card{margin:0 10px;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.18)}
+.iph-card-top{padding:14px;background:linear-gradient(135deg,#7B4A2D,#3B1F0E);color:#fff}
+.iph-brand{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;opacity:0.7;margin-bottom:3px}
+.iph-name{font-size:15px;font-weight:800;margin-bottom:10px}
+.iph-sellos{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}
+.iph-sello{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.iph-sello.filled{background:rgba(255,255,255,0.92)}
+.iph-sello.empty{border:1.5px solid rgba(255,255,255,0.3)}
+.iph-meta{font-size:9px;opacity:0.6}
+.iph-card-bottom{background:#2A1208;padding:10px;display:flex;flex-direction:column;align-items:center;gap:5px}
+.iph-qr{background:#fff;border-radius:6px;padding:5px}
+.iph-powered{font-size:7px;color:rgba(255,255,255,0.3)}
+.iph-dots{display:flex;gap:5px;justify-content:center;margin-top:8px;padding-bottom:8px}
+.iph-dot{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,0.12)}
+.iph-dot.active{background:var(--o)}
+.hero-floatcard{border-radius:14px;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,0.18);width:160px}
+.fc-top{padding:14px;background:linear-gradient(160deg,#1A1A1A 0%,#3D0000 55%,#CC2222 100%);color:#fff}
+.fc-logo-row{display:flex;align-items:center;gap:7px;margin-bottom:7px}
+.fc-logo-sq{width:28px;height:28px;border-radius:6px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fc-biz{font-size:9px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.85)}
+.fc-name{font-size:13px;font-weight:800;margin-bottom:3px}
+.fc-sub{font-size:9px;opacity:0.55;margin-bottom:10px}
+.fc-sellos{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px}
+.fcs{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fcs.filled{background:rgba(255,255,255,0.92)}
+.fcs.empty{border:1.5px solid rgba(255,255,255,0.3)}
+.fc-meta{font-size:8px;opacity:0.55}
+.fc-bottom{background:#0D0D0D;padding:10px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.fc-qr{background:#fff;border-radius:6px;padding:5px}
+.fc-powered{font-size:7px;color:rgba(255,255,255,0.3)}
 .btn-p{background:var(--o);color:var(--w);font-family:var(--fb);font-weight:500;font-size:14px;padding:12px 28px;border-radius:3px;border:none;cursor:pointer;transition:background 0.2s;text-decoration:none;display:inline-block}
 .btn-p:hover{background:var(--od)}
 .btn-s{background:transparent;color:var(--b);font-family:var(--fb);font-weight:400;font-size:14px;padding:12px 24px;border-radius:3px;border:1px solid var(--w4);cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block}
@@ -136,9 +177,10 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
 @media(max-width:768px){
   .nav-links a:not(.nav-cta){display:none}
   .hero{padding:3rem 5% 2.5rem;min-height:auto}
-  .hero h1{font-size:2.2rem;word-break:break-word}
-  .hero-actions{flex-direction:column}
-  .btn-p,.btn-s{width:100%;text-align:center;box-sizing:border-box}
+  .hero-inner{grid-template-columns:1fr}
+  .hero-phones{justify-content:center;flex-wrap:wrap}
+  .hero-h1{font-size:2.2rem;word-break:break-word}
+  .btn-p,.btn-s,.hero-btn{width:100%;text-align:center;box-sizing:border-box}
   .problema-grid,.contacto-wrap{grid-template-columns:1fr}
   .ind-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--w4);border-radius:6px;overflow:hidden;background:transparent;gap:0}
   .ind-item{border:none;border-right:1px solid var(--w4);border-bottom:1px solid var(--w4);background:var(--w)}
@@ -157,7 +199,7 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
 @media(max-width:600px){
   .hero-deco{width:100%;height:100%;clip-path:none;opacity:0.25;z-index:0}
   .hero-deco2{width:100%;height:100%;clip-path:none;opacity:0.15;z-index:0}
-  .hero-tag,.hero h1,.hero-sub,.hero-actions,.hero-proof{position:relative;z-index:1}
+  .hero-tag,.hero-h1,.hero-sub,.hero-note,.hero-proof{position:relative;z-index:1}
 }
 </style>
 </head>
@@ -176,21 +218,80 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
   </div>
 </nav>
 
-<section class="hero">
-  <div class="hero-deco"></div>
-  <div class="hero-deco2"></div>
-  <div class="hero-tag">Lealtad digital para negocios locales</div>
-  <h1>Convierte clientes<br>en <em>fans.</em></h1>
-  <p class="hero-sub">Sin tarjetas de papel que se pierden. Sin apps que nadie instala. Tu programa de lealtad viviendo en Apple Wallet y Google Wallet — donde tu cliente siempre lleva su celular.</p>
-  <div class="hero-actions">
-    <a href="#contacto" class="btn-p">Quiero mi demo gratis</a>
-    <a href="#como" class="btn-s">Ver cómo funciona →</a>
-  </div>
-  <div class="hero-proof">
-    <div class="proof-item"><div class="num">95%+</div><div class="lbl">de celulares compatibles</div></div>
-    <div class="proof-item"><div class="num">3 min</div><div class="lbl">para dar un sello</div></div>
-    <div class="proof-item"><div class="num">$0</div><div class="lbl">costo para tu cliente</div></div>
-    <div class="proof-item"><div class="num">1er mes</div><div class="lbl">completamente gratis</div></div>
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-tag">Lealtad digital · México</div>
+      <h1 class="hero-h1">Convierte clientes<br>en <em>fans.</em></h1>
+      <p class="hero-sub">Tu programa de lealtad en Apple Wallet y Google Wallet — sin papel, sin apps, con la identidad de tu marca.</p>
+      <a href="#contacto" class="btn-p hero-btn">Quiero mi demo gratis →</a>
+      <div class="hero-note">Primer mes gratis · Sin contrato · Sin tarjeta de crédito</div>
+      <div class="hero-proof">
+        <div class="proof-item"><div class="num">95%+</div><div class="lbl">celulares compatibles</div></div>
+        <div class="proof-item"><div class="num">48h</div><div class="lbl">para estar en vivo</div></div>
+        <div class="proof-item"><div class="num">$0</div><div class="lbl">costo para tu cliente</div></div>
+      </div>
+    </div>
+    <div class="hero-phones">
+      <div class="hero-iphone">
+        <div class="iph-frame">
+          <div class="iph-inner">
+            <div class="iph-screen">
+              <div class="iph-island"></div>
+              <div class="iph-wallet-nav">
+                <span class="iph-wallet-title">Wallet</span>
+                <span class="iph-wallet-plus">+</span>
+              </div>
+              <div class="iph-card">
+                <div class="iph-card-top">
+                  <div class="iph-brand">Brew &amp; Co · Cafetería</div>
+                  <div class="iph-name">Tarjeta Frecuente</div>
+                  <div class="iph-sellos">
+                    <div class="iph-sello filled"><svg width="10" height="10" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="7" ry="10" fill="#7B4A2D"/><path d="M12 3c0 0 3 4 3 9s-3 9-3 9" fill="none" stroke="#C8956C" stroke-width="2.5"/></svg></div>
+                    <div class="iph-sello filled"><svg width="10" height="10" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="7" ry="10" fill="#7B4A2D"/><path d="M12 3c0 0 3 4 3 9s-3 9-3 9" fill="none" stroke="#C8956C" stroke-width="2.5"/></svg></div>
+                    <div class="iph-sello filled"><svg width="10" height="10" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="7" ry="10" fill="#7B4A2D"/><path d="M12 3c0 0 3 4 3 9s-3 9-3 9" fill="none" stroke="#C8956C" stroke-width="2.5"/></svg></div>
+                    <div class="iph-sello filled"><svg width="10" height="10" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="7" ry="10" fill="#7B4A2D"/><path d="M12 3c0 0 3 4 3 9s-3 9-3 9" fill="none" stroke="#C8956C" stroke-width="2.5"/></svg></div>
+                    <div class="iph-sello filled"><svg width="10" height="10" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="7" ry="10" fill="#7B4A2D"/><path d="M12 3c0 0 3 4 3 9s-3 9-3 9" fill="none" stroke="#C8956C" stroke-width="2.5"/></svg></div>
+                    <div class="iph-sello empty"><svg width="9" height="9" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="7" ry="10" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><path d="M12 4c0 0 2.5 3.5 2.5 8s-2.5 8-2.5 8" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div>
+                    <div class="iph-sello empty"><svg width="9" height="9" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="7" ry="10" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><path d="M12 4c0 0 2.5 3.5 2.5 8s-2.5 8-2.5 8" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div>
+                    <div class="iph-sello empty"><svg width="9" height="9" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="7" ry="10" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><path d="M12 4c0 0 2.5 3.5 2.5 8s-2.5 8-2.5 8" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/></svg></div>
+                  </div>
+                  <div class="iph-meta">Ana García · 5 de 8 · Falta 1 café para tu gratis</div>
+                </div>
+                <div class="iph-card-bottom">
+                  <div class="iph-qr"><svg width="46" height="46" viewBox="0 0 44 44"><rect x="2" y="2" width="14" height="14" rx="2" fill="none" stroke="#000" stroke-width="2"/><rect x="5" y="5" width="8" height="8" fill="#000"/><rect x="28" y="2" width="14" height="14" rx="2" fill="none" stroke="#000" stroke-width="2"/><rect x="31" y="5" width="8" height="8" fill="#000"/><rect x="2" y="28" width="14" height="14" rx="2" fill="none" stroke="#000" stroke-width="2"/><rect x="5" y="31" width="8" height="8" fill="#000"/><rect x="20" y="2" width="4" height="4" fill="#000"/><rect x="20" y="8" width="4" height="4" fill="#000"/><rect x="26" y="20" width="4" height="4" fill="#000"/><rect x="20" y="20" width="4" height="4" fill="#000"/><rect x="34" y="28" width="4" height="4" fill="#000"/><rect x="28" y="34" width="10" height="4" fill="#000"/><rect x="34" y="20" width="8" height="4" fill="#000"/></svg></div>
+                  <div class="iph-powered">powered by fieloop</div>
+                </div>
+              </div>
+              <div class="iph-dots"><span class="iph-dot active"></span><span class="iph-dot"></span><span class="iph-dot"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-floatcard">
+        <div class="fc-top">
+          <div class="fc-logo-row">
+            <div class="fc-logo-sq"><svg width="18" height="18" viewBox="0 0 24 24"><rect x="7" y="1" width="10" height="22" rx="5" fill="#FAFCFF"/><path d="M7 5.5 Q12 7.5 17 5.5" fill="#CC2222"/><path d="M7 9.5 Q12 11.5 17 9.5" fill="#1A3A8F"/><path d="M7 13.5 Q12 15.5 17 13.5" fill="#CC2222"/><path d="M7 17.5 Q12 19.5 17 17.5" fill="#1A3A8F"/></svg></div>
+            <span class="fc-biz">The Barber Room</span>
+          </div>
+          <div class="fc-name">Cortes VIP Club</div>
+          <div class="fc-sub">Barbería Premium · Monterrey</div>
+          <div class="fc-sellos">
+            <div class="fcs filled"><svg width="9" height="9" viewBox="0 0 24 24"><rect x="7" y="1" width="10" height="22" rx="5" fill="#FAFCFF"/><path d="M7 5.5 Q12 7.5 17 5.5" fill="#CC2222"/><path d="M7 9.5 Q12 11.5 17 9.5" fill="#1A3A8F"/><path d="M7 13.5 Q12 15.5 17 13.5" fill="#CC2222"/><path d="M7 17.5 Q12 19.5 17 17.5" fill="#1A3A8F"/></svg></div>
+            <div class="fcs filled"><svg width="9" height="9" viewBox="0 0 24 24"><rect x="7" y="1" width="10" height="22" rx="5" fill="#FAFCFF"/><path d="M7 5.5 Q12 7.5 17 5.5" fill="#CC2222"/><path d="M7 9.5 Q12 11.5 17 9.5" fill="#1A3A8F"/><path d="M7 13.5 Q12 15.5 17 13.5" fill="#CC2222"/><path d="M7 17.5 Q12 19.5 17 17.5" fill="#1A3A8F"/></svg></div>
+            <div class="fcs filled"><svg width="9" height="9" viewBox="0 0 24 24"><rect x="7" y="1" width="10" height="22" rx="5" fill="#FAFCFF"/><path d="M7 5.5 Q12 7.5 17 5.5" fill="#CC2222"/><path d="M7 9.5 Q12 11.5 17 9.5" fill="#1A3A8F"/><path d="M7 13.5 Q12 15.5 17 13.5" fill="#CC2222"/><path d="M7 17.5 Q12 19.5 17 17.5" fill="#1A3A8F"/></svg></div>
+            <div class="fcs filled"><svg width="9" height="9" viewBox="0 0 24 24"><rect x="7" y="1" width="10" height="22" rx="5" fill="#FAFCFF"/><path d="M7 5.5 Q12 7.5 17 5.5" fill="#CC2222"/><path d="M7 9.5 Q12 11.5 17 9.5" fill="#1A3A8F"/><path d="M7 13.5 Q12 15.5 17 13.5" fill="#CC2222"/><path d="M7 17.5 Q12 19.5 17 17.5" fill="#1A3A8F"/></svg></div>
+            <div class="fcs empty"><svg width="9" height="9" viewBox="0 0 24 24"><rect x="7" y="1" width="10" height="22" rx="5" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M7 9 Q12 10.5 17 9" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><path d="M7 14 Q12 15.5 17 14" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/></svg></div>
+            <div class="fcs empty"><svg width="9" height="9" viewBox="0 0 24 24"><rect x="7" y="1" width="10" height="22" rx="5" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M7 9 Q12 10.5 17 9" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><path d="M7 14 Q12 15.5 17 14" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/></svg></div>
+          </div>
+          <div class="fc-meta">4 de 6 · Próximo corte con 20% desc.</div>
+        </div>
+        <div class="fc-bottom">
+          <div class="fc-qr"><svg width="42" height="42" viewBox="0 0 44 44"><rect x="2" y="2" width="14" height="14" rx="2" fill="none" stroke="#000" stroke-width="2"/><rect x="5" y="5" width="8" height="8" fill="#000"/><rect x="28" y="2" width="14" height="14" rx="2" fill="none" stroke="#000" stroke-width="2"/><rect x="31" y="5" width="8" height="8" fill="#000"/><rect x="2" y="28" width="14" height="14" rx="2" fill="none" stroke="#000" stroke-width="2"/><rect x="5" y="31" width="8" height="8" fill="#000"/><rect x="20" y="2" width="4" height="4" fill="#000"/><rect x="26" y="20" width="4" height="4" fill="#000"/><rect x="20" y="20" width="4" height="4" fill="#000"/><rect x="34" y="28" width="4" height="4" fill="#000"/><rect x="28" y="34" width="10" height="4" fill="#000"/><rect x="34" y="20" width="8" height="4" fill="#000"/></svg></div>
+          <div class="fc-powered">powered by fieloop</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
