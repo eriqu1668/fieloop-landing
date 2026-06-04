@@ -241,6 +241,17 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
 .demo-nombre-input { width: 100%; border: 1px solid var(--w4); border-radius: 3px; padding: 8px 12px; font-family: var(--fb); font-size: 13px; color: var(--txt); background: var(--w); outline: none; }
 .demo-nombre-input:focus { border-color: var(--o); }
 @media(max-width: 768px) { .demo-wrap { grid-template-columns: 1fr; } .demo-phone-col { margin-bottom: 1rem; } }
+.sec-faq { background: var(--w2); border-top: 1px solid var(--w3); border-bottom: 1px solid var(--w3); padding: 5rem 5%; }
+.faq-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 0; border: 1px solid var(--w3); border-radius: var(--r); overflow: hidden; }
+.faq-item { border-bottom: 1px solid var(--w3); background: var(--w); }
+.faq-item:last-child { border-bottom: none; }
+.faq-q { width: 100%; background: transparent; border: none; padding: 1.2rem 1.5rem; text-align: left; font-family: var(--fb); font-size: 14px; font-weight: 600; color: var(--b); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; transition: background 0.2s; }
+.faq-q:hover { background: var(--w2); }
+.faq-q::after { content: '+'; font-size: 1.3rem; font-weight: 300; color: var(--o); flex-shrink: 0; transition: transform 0.25s; }
+.faq-q[aria-expanded="true"] { background: var(--w2); color: var(--o); }
+.faq-q[aria-expanded="true"]::after { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding: 0 1.5rem; font-size: 13.5px; color: var(--txt2); line-height: 1.75; }
+.faq-a.open { max-height: 300px; padding: 0 1.5rem 1.2rem; }
 </style>
 </head>
 <body>
@@ -573,6 +584,45 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
   </div>
 </section>
 
+<section class="sec sec-faq" id="faq">
+  <div class="sec-tag">Preguntas frecuentes</div>
+  <h2 class="sec-h2">Todo lo que necesitas<br><em>saber antes de empezar.</em></h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">¿Mis clientes tienen que descargar una app?</button>
+      <div class="faq-a">Las tarjetas de Fieloop viven en Apple Wallet y Google Wallet, que ya vienen instalados en prácticamente todos los celulares. Tu cliente solo escanea un QR o recibe un link y con un tap la tarjeta queda guardada para siempre. Sin descargas, sin contraseñas, sin fricciones.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">¿Cuánto tiempo tarda en estar listo mi programa?</button>
+      <div class="faq-a">En menos de 48 horas tu tarjeta está activa y funcionando. Tu logo, colores, tipo de tarjeta y recompensa, todo configurado y listo para que tus clientes empiecen a acumular sellos desde el primer día.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">¿Cómo le doy un sello a mi cliente?</button>
+      <div class="faq-a">El empleado abre el scanner desde cualquier navegador en el celular o tablet que ya tiene el negocio, sin comprar hardware ni instalar nada adicional. El cliente muestra la tarjeta de su Wallet, el empleado escanea el QR con la cámara del dispositivo y el sello se registra al instante. Así de simple.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">¿Qué información obtengo de mis clientes?</button>
+      <div class="faq-a">Tienes acceso a un dashboard con visitas por cliente, frecuencia de regreso, hora pico de tu negocio, tasa de redención de premios y clientes en riesgo de no volver. Es el mini-CRM que una tarjeta de papel jamás te dará.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">¿Puedo tener varios tipos de tarjeta al mismo tiempo?</button>
+      <div class="faq-a">Depende del plan. Con Frecuencia tienes 1 tipo activo. Con Lealtad puedes combinar hasta 3 simultáneamente, por ejemplo punch card para visitas diarias y cashback para ticket alto. Con Crecimiento llegas a 5 tipos activos.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">¿Puedo cancelar cuando quiera?</button>
+      <div class="faq-a">Sí. Sin contratos anuales forzados, sin penalizaciones. Cancelas cuando quieras desde tu panel. Lo único que recomendamos es no cancelar abruptamente si ya tienes clientes activos, ya que sus tarjetas dejarían de funcionar.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">¿Los datos de mis clientes son míos?</button>
+      <div class="faq-a">100%. Fieloop es el vehículo, no el dueño. Tu base de clientes te pertenece a ti. Cumplimos con la Ley Federal de Protección de Datos Personales y toda la información viaja encriptada.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">¿Funciona igual en Android y en iPhone?</button>
+      <div class="faq-a">Sí. Apple Wallet para iPhone y Google Wallet para Android. Ambos funcionan exactamente igual. El cliente guarda la tarjeta con un tap y el empleado escanea el QR desde el dispositivo del negocio. Compatible con más del 95% de los celulares en México.</div>
+    </div>
+  </div>
+</section>
+
 <section class="sec-contacto" id="contacto">
   <div class="sec-tag">¿Listo para tener fans?</div>
   <h2 class="sec-h2">Tu primer mes<br><em>es gratis.</em></h2>
@@ -787,6 +837,20 @@ if(cardL&&cardR){
 
   demoUpdate();
 })();
+
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('.faq-q').forEach(b => {
+      b.setAttribute('aria-expanded', 'false');
+      b.nextElementSibling.classList.remove('open');
+    });
+    if (!isOpen) {
+      btn.setAttribute('aria-expanded', 'true');
+      btn.nextElementSibling.classList.add('open');
+    }
+  });
+});
 </script>
 </body>
 </html>
