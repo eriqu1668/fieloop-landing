@@ -202,7 +202,7 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
   .hero-tag,.hero-h1,.hero-sub,.hero-note,.hero-proof{position:relative;z-index:1}
 }
 .sec-demo { background: var(--w); border-top: 1px solid var(--w3); padding: 5rem 5%; }
-.demo-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; margin-top: 2.5rem; }
+.demo-wrap { display: grid; grid-template-columns: 1fr 200px 1fr; gap: 2rem; align-items: center; margin-top: 2.5rem; }
 .demo-phone-col { display: flex; justify-content: center; }
 .demo-iphone { width: 200px; }
 .demo-iph-frame { background: linear-gradient(180deg,#3C3C3C,#1C1C1C); border-radius: 44px; padding: 3px; box-shadow: inset 0 0 0 0.5px rgba(255,255,255,0.1), 0 0 0 0.5px rgba(0,0,0,0.8); }
@@ -240,7 +240,19 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
 .demo-slider-val { font-size: 16px; font-weight: 700; color: var(--txt); min-width: 24px; text-align: center; }
 .demo-nombre-input { width: 100%; border: 1px solid var(--w4); border-radius: 3px; padding: 8px 12px; font-family: var(--fb); font-size: 13px; color: var(--txt); background: var(--w); outline: none; }
 .demo-nombre-input:focus { border-color: var(--o); }
-@media(max-width: 768px) { .demo-wrap { grid-template-columns: 1fr; } .demo-phone-col { margin-bottom: 1rem; } }
+.demo-info-card { background: var(--w); border: 1px solid var(--w3); border-left: 3px solid var(--o); border-radius: var(--r); padding: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; transition: all 0.3s; }
+.dic-icon { font-size: 2rem; margin-bottom: 0.3rem; }
+.dic-giro { font-size: 1.1rem; font-weight: 800; color: var(--b); font-family: var(--fs); }
+.dic-tipo-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--txt3); margin-top: 0.3rem; }
+.dic-tipo { display: inline-block; font-size: 11px; font-weight: 600; color: var(--o); border: 1px solid var(--obr); background: var(--ob); padding: 3px 10px; border-radius: 2px; }
+.dic-desc { font-size: 13px; color: var(--txt2); line-height: 1.65; margin-top: 0.2rem; }
+.dic-result { font-size: 11px; font-weight: 600; color: var(--o); padding-top: 0.6rem; border-top: 1px solid var(--w3); line-height: 1.4; }
+@media(max-width: 768px) {
+  .demo-wrap { grid-template-columns: 1fr; }
+  .demo-info-card { order: 2; }
+  .demo-phone-col { order: 1; margin-bottom: 1rem; }
+  .demo-controls-col { order: 3; }
+}
 .sec-faq { background: var(--w2); border-top: 1px solid var(--w3); border-bottom: 1px solid var(--w3); padding: 5rem 5%; }
 .faq-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 0; border: 1px solid var(--w3); border-radius: var(--r); overflow: hidden; }
 .faq-item { border-bottom: 1px solid var(--w3); background: var(--w); }
@@ -414,6 +426,14 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
   <h2 class="sec-h2">Así se ve Fieloop<br><em>en el bolsillo de tus clientes.</em></h2>
   <p class="sec-sub">Personaliza el color, el giro y los sellos. Mira cómo se vería tu tarjeta — en tiempo real.</p>
   <div class="demo-wrap">
+    <div class="demo-info-card" id="demoInfoCard">
+      <div class="dic-icon" id="dicIcon"></div>
+      <div class="dic-giro" id="dicGiro">Cafetería</div>
+      <div class="dic-tipo-label">Tarjeta recomendada</div>
+      <div class="dic-tipo" id="dicTipo">Punch card</div>
+      <div class="dic-desc" id="dicDesc">Compra diaria, ticket bajo. El sello es el driver natural de regreso.</div>
+      <div class="dic-result" id="dicResult">+40% más visitas frecuentes vs sin programa de lealtad</div>
+    </div>
     <div class="demo-phone-col">
       <div class="demo-iphone">
         <div class="demo-iph-frame">
@@ -551,54 +571,6 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
   </div>
 </section>
 
-<section class="sec-ind">
-  <div class="sec-tag">Casos de uso</div>
-  <h2 class="sec-h2">Para cualquier negocio<br><em>que vive de sus clientes.</em></h2>
-  <div class="ind-grid">
-    <div class="ind-item">
-      <div class="ind-emoji"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg></div>
-      <div class="ind-n">Cafeterías</div>
-      <div class="ind-type">Punch card</div>
-      <div class="ind-d">Compra diaria, ticket bajo. El sello es el driver natural de regreso.</div>
-      <div class="ind-result">+40% más visitas frecuentes vs sin programa de lealtad</div>
-    </div>
-    <div class="ind-item">
-      <div class="ind-emoji"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg></div>
-      <div class="ind-n">Restaurantes</div>
-      <div class="ind-type">Cashback</div>
-      <div class="ind-d">Ticket alto. El cliente acumula valor monetario real en cada visita.</div>
-      <div class="ind-result">Ticket promedio 25% más alto en clientes con cashback activo</div>
-    </div>
-    <div class="ind-item">
-      <div class="ind-emoji"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
-      <div class="ind-n">Salones de belleza</div>
-      <div class="ind-type">Membership</div>
-      <div class="ind-d">Servicio periódico. Genera compromiso de regreso natural.</div>
-      <div class="ind-result">3x más retención con membresía vs cliente sin tarjeta</div>
-    </div>
-    <div class="ind-item">
-      <div class="ind-emoji"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></div>
-      <div class="ind-n">Barberías</div>
-      <div class="ind-type">Punch + Referral</div>
-      <div class="ind-d">Base masculina muy referenciable. Cada cliente trae amigos.</div>
-      <div class="ind-result">1 de cada 3 clientes nuevos llega por referido</div>
-    </div>
-    <div class="ind-item">
-      <div class="ind-emoji"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
-      <div class="ind-n">Retail local</div>
-      <div class="ind-type">Reward con tiers</div>
-      <div class="ind-d">Niveles cliente regular vs VIP que premian la fidelidad.</div>
-      <div class="ind-result">Clientes VIP gastan 2x más que clientes sin programa</div>
-    </div>
-    <div class="ind-item">
-      <svg class="ind-emoji" width="32" height="32" viewBox="0 0 64 32" fill="none" stroke="#F97316" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="20" y1="16" x2="44" y2="16"/><rect x="14" y="13" width="6" height="6" rx="1" fill="rgba(249,115,22,0.15)" stroke="#F97316"/><rect x="5" y="9" width="9" height="14" rx="2" fill="rgba(249,115,22,0.1)" stroke="#F97316"/><rect x="2" y="11" width="5" height="10" rx="2" fill="rgba(249,115,22,0.15)" stroke="#F97316"/><rect x="44" y="13" width="6" height="6" rx="1" fill="rgba(249,115,22,0.15)" stroke="#F97316"/><rect x="50" y="9" width="9" height="14" rx="2" fill="rgba(249,115,22,0.1)" stroke="#F97316"/><rect x="57" y="11" width="5" height="10" rx="2" fill="rgba(249,115,22,0.15)" stroke="#F97316"/></svg>
-      <div class="ind-n">Gimnasios</div>
-      <div class="ind-type">Membership</div>
-      <div class="ind-d">Visita recurrente. El cliente siente que pertenece, no solo que acumula.</div>
-      <div class="ind-result">70% menos cancelaciones con membresía digital activa</div>
-    </div>
-  </div>
-</section>
 
 <section class="sec sec-faq" id="faq">
   <div class="sec-tag">Preguntas frecuentes</div>
@@ -774,6 +746,14 @@ if(cardL&&cardR){
 
 (function() {
   const demoState = { giro: 'Cafetería', color: '#7B4A2D', sellos: 8, nombre: '' };
+  const demoInfo = {
+    'Cafetería': { icon: '☕', tipo: 'Punch card', desc: 'Compra diaria, ticket bajo. El sello es el driver natural de regreso.', result: '+40% más visitas frecuentes vs sin programa de lealtad' },
+    'Restaurante': { icon: '🍽', tipo: 'Cashback', desc: 'Ticket alto. El cliente acumula valor monetario real en cada visita.', result: 'Ticket promedio 25% más alto en clientes con cashback activo' },
+    'Barbería': { icon: '✂', tipo: 'Punch + Referral', desc: 'Base masculina muy referenciable. Cada cliente trae amigos.', result: '1 de cada 3 clientes nuevos llega por referido' },
+    'Salón': { icon: '💅', tipo: 'Membership', desc: 'Servicio periódico. La membresía genera compromiso de regreso natural.', result: '3x más retención con membresía vs cliente sin tarjeta' },
+    'Gimnasio': { icon: '💪', tipo: 'Membership', desc: 'Visita recurrente. El cliente siente que pertenece, no solo que acumula.', result: '70% menos cancelaciones con membresía digital activa' },
+    'Retail': { icon: '🛍', tipo: 'Reward con tiers', desc: 'Niveles cliente regular vs VIP que premian la fidelidad real.', result: 'Clientes VIP gastan 2x más que clientes sin programa' }
+  };
   const demoPremios = { 'Cafetería':'Compra 8 y llévate 1 gratis', 'Restaurante':'Acumula y gana un platillo gratis', 'Barbería':'Cortes acumulados = corte gratis', 'Salón':'Premio en tu próxima visita', 'Gimnasio':'Mes gratis al completar', 'Retail':'Canjea puntos en tu próxima compra' };
   const demoLabels = { 'Cafetería':'Cafetería', 'Restaurante':'Restaurante', 'Barbería':'Barbería', 'Salón':'Salón de belleza', 'Gimnasio':'Gimnasio', 'Retail':'Retail' };
 
@@ -791,6 +771,17 @@ if(cardL&&cardR){
       'Retail': `<svg width="18" height="18" viewBox="0 0 24 24" opacity="${op}"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" fill="${filled?'rgba(255,255,255,0.9)':'none'}" stroke="rgba(255,255,255,${filled?0.9:0.4})" stroke-width="1.5" stroke-linejoin="round"/><line x1="3" y1="6" x2="21" y2="6" stroke="rgba(255,255,255,${filled?0.6:0.3})" stroke-width="1.5"/><path d="M16 10a4 4 0 0 1-8 0" fill="none" stroke="rgba(255,255,255,${filled?0.7:0.3})" stroke-width="1.5" stroke-linecap="round"/></svg>`
     };
     return svgs[giro] || svgs['Cafetería'];
+  }
+
+  function updateInfoCard() {
+    const info = demoInfo[demoState.giro];
+    if (!info) return;
+    const el = (id) => document.getElementById(id);
+    if (el('dicIcon')) el('dicIcon').textContent = info.icon;
+    if (el('dicGiro')) el('dicGiro').textContent = demoState.giro;
+    if (el('dicTipo')) el('dicTipo').textContent = info.tipo;
+    if (el('dicDesc')) el('dicDesc').textContent = info.desc;
+    if (el('dicResult')) el('dicResult').textContent = info.result;
   }
 
   function darkenHex(hex, amt) {
@@ -816,6 +807,7 @@ if(cardL&&cardR){
       wrap.innerHTML = makeSelloSVG(demoState.giro, i < filled, color);
       container.appendChild(wrap);
     }
+    updateInfoCard();
   }
 
   const gg = document.getElementById('demoGiroGrid');
@@ -852,6 +844,7 @@ if(cardL&&cardR){
   });
 
   demoUpdate();
+  updateInfoCard();
 })();
 
 document.querySelectorAll('.faq-q').forEach(btn => {
