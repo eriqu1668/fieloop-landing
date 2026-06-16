@@ -174,44 +174,6 @@ body.dark .iph-wallet-plus,body.dark .demo-wallet-plus{background:#2A2A2A;color:
 .hero-proof{margin-top:3.5rem;display:flex;gap:3rem;flex-wrap:wrap;padding-top:2.5rem;border-top:1px solid var(--w4)}
 .proof-item .num{font-family:var(--fs);font-size:1.8rem;font-weight:800;color:var(--o);line-height:1}
 .proof-item .lbl{font-size:12px;color:var(--txt3);margin-top:3px}
-.sec-anim{height:280vh;position:relative;background:var(--b)}
-.anim-sticky{position:sticky;top:0;height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4rem;padding:0 8%;overflow:hidden}
-.anim-left{display:flex;flex-direction:column;gap:3rem;position:relative;z-index:2}
-.anim-step{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
-.anim-step.visible{opacity:1;transform:translateY(0)}
-.anim-step-num{font-size:3rem;font-weight:800;color:rgba(249,115,22,0.15);line-height:1;margin-bottom:0.5rem;font-family:var(--fs);-webkit-text-stroke:1px rgba(249,115,22,0.3)}
-.anim-step.visible .anim-step-num{color:rgba(249,115,22,0.2);-webkit-text-stroke:1px var(--o)}
-.anim-step-title{font-size:1.4rem;font-weight:700;color:var(--w);margin-bottom:0.5rem;font-family:var(--fs)}
-.anim-step-desc{font-size:14px;color:rgba(250,252,255,0.55);line-height:1.7;font-weight:300;max-width:360px}
-.anim-right{display:flex;justify-content:center;align-items:center;position:relative;z-index:2}
-.anim-phone{position:relative;transform:translateY(0px);transition:transform 0.8s cubic-bezier(0.25,0,0,1)}
-.anim-phone-frame{background:linear-gradient(180deg,#3C3C3C,#1C1C1C);border-radius:44px;padding:3px;box-shadow:inset 0 0 0 0.5px rgba(255,255,255,0.1),0 0 0 0.5px rgba(0,0,0,0.8),0 24px 60px rgba(0,0,0,0.5);width:220px}
-.anim-phone-inner{background:#000;border-radius:42px;overflow:hidden}
-.anim-phone-screen{background:#F2F2F7;min-height:460px;position:relative}
-body.dark .anim-phone-screen{background:#0A0A0A}
-.anim-phone-island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:60px;height:16px;background:#000;border-radius:20px;z-index:10}
-.anim-wallet-nav{display:flex;justify-content:space-between;align-items:center;padding:34px 16px 10px}
-.anim-wallet-title{font-size:26px;font-weight:700;color:#000;letter-spacing:-0.5px}
-body.dark .anim-wallet-title{color:#FAFCFF}
-.anim-wallet-plus{width:26px;height:26px;border-radius:50%;background:#E5E5EA;display:flex;align-items:center;justify-content:center;font-size:16px;color:#000}
-body.dark .anim-wallet-plus{background:#2A2A2A;color:#FAFCFF}
-.anim-card{margin:0 10px;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.15);opacity:0;transform:translateY(20px) scale(0.97);transition:opacity 0.6s ease,transform 0.6s ease}
-.anim-card.visible{opacity:1;transform:translateY(0) scale(1)}
-.anim-card-top{padding:14px 16px 12px;background:linear-gradient(135deg,#7B4A2D,#3B1F0E);color:#fff;transition:background 0.6s ease}
-.anim-card-brand{font-size:8px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;opacity:0.7;margin-bottom:4px}
-.anim-card-name{font-size:16px;font-weight:800;margin-bottom:10px}
-.anim-card-sellos{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px;min-height:22px}
-.anim-sello{width:20px;height:20px;border-radius:50%;transition:all 0.3s ease}
-.anim-sello.filled{background:rgba(255,255,255,0.92);transform:scale(1)}
-.anim-sello.empty{border:1.5px solid rgba(255,255,255,0.3);background:transparent}
-.anim-sello.popping{animation:selloPop 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards}
-@keyframes selloPop{0%{transform:scale(0);opacity:0}60%{transform:scale(1.3)}100%{transform:scale(1);opacity:1}}
-.anim-card-meta{font-size:8.5px;opacity:0.65}
-.anim-card-bottom{background:#2A1208;padding:10px;display:flex;flex-direction:column;align-items:center;gap:4px}
-.anim-qr{background:#fff;border-radius:6px;padding:5px;opacity:0;transform:scale(0.8);transition:opacity 0.5s ease 0.3s,transform 0.5s ease 0.3s}
-.anim-qr.visible{opacity:1;transform:scale(1)}
-.anim-powered{font-size:7px;color:rgba(255,255,255,0.3)}
-@media(max-width:768px){.sec-anim{height:400vh}.anim-sticky{grid-template-columns:1fr;grid-template-rows:auto 1fr;padding:2rem 1.5rem;gap:2rem;align-items:start;padding-top:4rem}.anim-right{order:-1}.anim-phone-frame{width:180px}.anim-step-title{font-size:1.1rem}}
 .sec-problema{background:var(--w);padding:5rem 5%;border-top:1px solid var(--w4)}
 .sec-tag{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--o);margin-bottom:0.8rem}
 .sec-h2{font-family:var(--fs);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin-bottom:1.2rem;color:var(--b)}
@@ -808,57 +770,6 @@ body.dark .p-card:not(.feat).p-selected { border-color: #4B7FCC; }
   </div>
 </section>
 
-<section class="sec-anim" id="anim">
-  <div class="anim-sticky">
-    <div class="anim-left">
-      <div class="anim-step" id="animStep1">
-        <div class="anim-step-num">01</div>
-        <h3 class="anim-step-title">Configuras tu tarjeta</h3>
-        <p class="anim-step-desc">Defines tu promoción, colores y cuántos sellos necesita tu cliente. Listo en 30 minutos.</p>
-      </div>
-      <div class="anim-step" id="animStep2">
-        <div class="anim-step-num">02</div>
-        <h3 class="anim-step-title">Tu cliente la guarda</h3>
-        <p class="anim-step-desc">Escanea un QR y la tarjeta queda en su Apple Wallet o Google Wallet con un tap.</p>
-      </div>
-      <div class="anim-step" id="animStep3">
-        <div class="anim-step-num">03</div>
-        <h3 class="anim-step-title">El empleado escanea</h3>
-        <p class="anim-step-desc">Desde cualquier navegador, sin hardware adicional. El sello se registra en tiempo real.</p>
-      </div>
-    </div>
-    <div class="anim-right">
-      <div class="anim-phone">
-        <div class="anim-phone-frame">
-          <div class="anim-phone-inner">
-            <div class="anim-phone-screen">
-              <div class="anim-phone-island"></div>
-              <div class="anim-wallet-nav">
-                <span class="anim-wallet-title">Wallet</span>
-                <span class="anim-wallet-plus">+</span>
-              </div>
-              <div class="anim-card" id="animCard">
-                <div class="anim-card-top">
-                  <div class="anim-card-brand" id="animBrand">BREW &amp; CO · CAFETERÍA</div>
-                  <div class="anim-card-name" id="animName">Tarjeta Frecuente</div>
-                  <div class="anim-card-sellos" id="animSellos"></div>
-                  <div class="anim-card-meta" id="animMeta">Acumula y llévate 1 café gratis</div>
-                </div>
-                <div class="anim-card-bottom">
-                  <div class="anim-qr" id="animQr">
-                    <svg width="52" height="52" viewBox="0 0 44 44"><rect x="2" y="2" width="14" height="14" rx="2" fill="none" stroke="#000" stroke-width="2"/><rect x="5" y="5" width="8" height="8" fill="#000"/><rect x="28" y="2" width="14" height="14" rx="2" fill="none" stroke="#000" stroke-width="2"/><rect x="31" y="5" width="8" height="8" fill="#000"/><rect x="2" y="28" width="14" height="14" rx="2" fill="none" stroke="#000" stroke-width="2"/><rect x="5" y="31" width="8" height="8" fill="#000"/><rect x="20" y="2" width="4" height="4" fill="#000"/><rect x="20" y="8" width="4" height="4" fill="#000"/><rect x="26" y="20" width="4" height="4" fill="#000"/><rect x="20" y="20" width="4" height="4" fill="#000"/><rect x="34" y="28" width="4" height="4" fill="#000"/><rect x="28" y="34" width="10" height="4" fill="#000"/><rect x="34" y="20" width="8" height="4" fill="#000"/></svg>
-                  </div>
-                  <div class="anim-powered">powered by fieloop</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="sec-problema">
   <div class="sec-tag">El problema</div>
   <h2 class="sec-h2">Las tarjetas de papel<br><em>no funcionan.</em></h2>
@@ -1436,101 +1347,7 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
   });
 })();
 </script>
-<script>
-(function() {
-  const section = document.getElementById('anim');
-  if (!section) return;
 
-  const steps = [
-    document.getElementById('animStep1'),
-    document.getElementById('animStep2'),
-    document.getElementById('animStep3')
-  ];
-  const card = document.getElementById('animCard');
-  const sellosContainer = document.getElementById('animSellos');
-  const qr = document.getElementById('animQr');
-
-  const totalSellos = 8;
-  let sellosCreated = false;
-  let sellosShown = 0;
-  let lastProgress = -1;
-
-  function createSellos() {
-    sellosContainer.innerHTML = '';
-    for (let i = 0; i < totalSellos; i++) {
-      const s = document.createElement('div');
-      s.className = 'anim-sello empty';
-      sellosContainer.appendChild(s);
-    }
-    sellosCreated = true;
-  }
-
-  function fillSello(index) {
-    const sellos = sellosContainer.querySelectorAll('.anim-sello');
-    if (sellos[index] && sellos[index].classList.contains('empty')) {
-      sellos[index].classList.remove('empty');
-      sellos[index].classList.add('filled', 'popping');
-      setTimeout(() => sellos[index].classList.remove('popping'), 400);
-    }
-  }
-
-  function unfillSello(index) {
-    const sellos = sellosContainer.querySelectorAll('.anim-sello');
-    if (sellos[index] && sellos[index].classList.contains('filled')) {
-      sellos[index].classList.remove('filled');
-      sellos[index].classList.add('empty');
-    }
-  }
-
-  function onScroll() {
-    const rect = section.getBoundingClientRect();
-    const scrollable = section.offsetHeight - window.innerHeight;
-    const progress = Math.max(0, Math.min(1, -rect.top / scrollable));
-
-    if (Math.abs(progress - lastProgress) < 0.001) return;
-    lastProgress = progress;
-
-    if (!sellosCreated) createSellos();
-
-    if (progress >= 0.05) {
-      steps[0].classList.add('visible');
-      card.classList.add('visible');
-    } else {
-      steps[0].classList.remove('visible');
-      card.classList.remove('visible');
-    }
-
-    if (progress >= 0.25) {
-      steps[1].classList.add('visible');
-      const sellosTarget = Math.round(((progress - 0.25) / 0.35) * totalSellos);
-      const clamped = Math.max(0, Math.min(totalSellos, sellosTarget));
-      if (clamped > sellosShown) {
-        for (let i = sellosShown; i < clamped; i++) fillSello(i);
-        sellosShown = clamped;
-      } else if (clamped < sellosShown) {
-        for (let i = sellosShown - 1; i >= clamped; i--) unfillSello(i);
-        sellosShown = clamped;
-      }
-    } else {
-      steps[1].classList.remove('visible');
-      const sellos = sellosContainer.querySelectorAll('.anim-sello');
-      sellos.forEach(s => { s.classList.remove('filled','popping'); s.classList.add('empty'); });
-      sellosShown = 0;
-    }
-
-    if (progress >= 0.65) {
-      steps[2].classList.add('visible');
-      qr.classList.add('visible');
-    } else {
-      steps[2].classList.remove('visible');
-      qr.classList.remove('visible');
-    }
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-})();
-</script>
 
 <script>
 /* Premium scroll-reveal via IntersectionObserver */
