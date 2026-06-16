@@ -138,12 +138,13 @@ body.dark .ind-n{color:#E8EEF8}
 body.dark .ind-d{color:#6A82A0}
 body.dark .ind-result{border-top-color:#1E2D45}
 body.dark .sec-faq{background:#141D2E;border-top-color:#1E2D45;border-bottom-color:#1E2D45}
-body.dark .faq-list{background:#1E2D45;border-color:#1E2D45}
-body.dark .faq-item{background:#0F1520;border-bottom-color:#1E2D45}
-body.dark .faq-item:nth-child(odd){border-right-color:#1E2D45}
+body.dark .faq-item{background:#0F1520;border-color:#1E2D45}
+body.dark .faq-item::before{background:radial-gradient(280px circle at var(--fx,50%) var(--fy,50%),rgba(249,115,22,0.09),transparent 70%)}
+body.dark .faq-item:hover{box-shadow:0 6px 24px rgba(0,0,0,0.35)}
+body.dark .faq-icon{border-color:#1E2D45;background:#141D2E}
 body.dark .faq-q{color:#E8EEF8}
-body.dark .faq-q:hover{background:#141D2E}
-body.dark .faq-q[aria-expanded="true"]{background:#141D2E;color:#F97316}
+body.dark .faq-q:hover{color:#E8EEF8}
+body.dark .faq-q[aria-expanded="true"] .faq-q-text{color:#F97316}
 body.dark .faq-a{color:#A0B4CC}
 body.dark .sec-contacto{background:#0A0E1A}
 body.dark .hero{animation:heroGradientDark 12s ease infinite}
@@ -385,23 +386,69 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
   .demo-controls-col { order: 3; }
 }
 .sec-faq { background: var(--w2); border-top: 1px solid var(--w3); border-bottom: 1px solid var(--w3); padding: 5rem 5%; }
-.faq-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1px; background: var(--w3); border: 1px solid var(--w3); border-radius: var(--r); overflow: hidden; margin-top: 2rem; }
-.faq-item { border-bottom: 1px solid var(--w3); background: var(--w); border-right: none; }
-.faq-item:nth-child(odd) { border-right: 1px solid var(--w3); }
-.faq-item:nth-child(7),.faq-item:nth-child(8) { border-bottom: none; }
-@media(max-width:768px) {
-  .faq-list { grid-template-columns: 1fr; }
-  .faq-item:nth-child(odd) { border-right: none; }
-  .faq-item:last-child { border-bottom: none; }
-  .faq-item:nth-child(7) { border-bottom: 1px solid var(--w3); }
+.faq-list { display: flex; flex-direction: column; gap: 0.65rem; margin-top: 2.5rem; }
+
+/* FAQ card */
+.faq-item {
+  position: relative; overflow: hidden;
+  background: var(--w); border: 1px solid var(--w4);
+  border-radius: 14px;
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s;
 }
-.faq-q { width: 100%; background: transparent; border: none; padding: 1.2rem 1.5rem; text-align: left; font-family: var(--fb); font-size: 14px; font-weight: 600; color: var(--b); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; transition: background 0.2s; }
-.faq-q:hover { background: var(--w2); }
-.faq-q::after { content: '+'; font-size: 1.3rem; font-weight: 300; color: var(--o); flex-shrink: 0; transition: transform 0.25s; }
-.faq-q[aria-expanded="true"] { background: var(--w2); color: var(--o); }
-.faq-q[aria-expanded="true"]::after { transform: rotate(45deg); }
-.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding: 0 1.5rem; font-size: 13.5px; color: var(--txt2); line-height: 1.75; }
-.faq-a.open { max-height: 300px; padding: 0 1.5rem 1.2rem; }
+.faq-item::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: radial-gradient(280px circle at var(--fx,50%) var(--fy,50%), rgba(18,35,79,0.07), transparent 70%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.faq-item:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(18,35,79,0.09); }
+.faq-item:hover::before,
+.faq-item:has(.faq-q[aria-expanded="true"])::before { opacity: 1; }
+
+/* Button row */
+.faq-q {
+  width: 100%; background: transparent; border: none;
+  padding: 1.2rem 1.4rem; text-align: left;
+  font-family: var(--fb); font-size: 14px; font-weight: 600;
+  color: var(--b); cursor: pointer;
+  display: flex; align-items: center; gap: 1rem;
+  position: relative; z-index: 1;
+}
+.faq-q:hover { background: transparent; color: var(--b); }
+
+/* Circle icon */
+.faq-icon {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1px solid var(--w4); background: var(--w3);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; position: relative;
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+.faq-icon svg { width: 15px; height: 15px; stroke: var(--o); fill: none; stroke-width: 2; stroke-linecap: round; transition: transform 0.35s cubic-bezier(0.22,1,0.36,1); }
+.faq-item:hover .faq-icon { transform: scale(1.06); }
+@keyframes faq-ping {
+  0% { transform: scale(1); opacity: 0.5; }
+  70%,100% { transform: scale(1.55); opacity: 0; }
+}
+.faq-icon::after {
+  content: ''; position: absolute; inset: -1px; border-radius: 50%;
+  border: 1px solid var(--w4); opacity: 0;
+}
+.faq-item:has(.faq-q[aria-expanded="true"]) .faq-icon::after {
+  animation: faq-ping 1.8s ease-out infinite; opacity: 0.45;
+}
+.faq-q-text { flex: 1; }
+.faq-q[aria-expanded="true"] .faq-icon svg { transform: rotate(45deg); }
+.faq-q[aria-expanded="true"] .faq-q-text { color: var(--o); }
+
+/* Answer panel */
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.22,1,0.36,1), padding 0.3s ease;
+  padding: 0 1.4rem 0 calc(1.4rem + 38px + 1rem);
+  font-size: 13.5px; color: var(--txt2); line-height: 1.8;
+  position: relative; z-index: 1;
+}
+.faq-a.open { max-height: 300px; padding: 0.1rem 1.4rem 1.25rem calc(1.4rem + 38px + 1rem); }
 .ind-result {
   font-size: 10.5px;
   font-weight: 600;
@@ -553,11 +600,7 @@ html { scroll-behavior: smooth; }
   outline: none;
 }
 
-/* --- FAQ hover --- */
-.faq-q {
-  transition: color 0.18s ease;
-}
-.faq-q:hover { color: var(--o); }
+/* --- FAQ hover handled by card design --- */
 
 /* --- Precios card elevation --- */
 .precios-desc { color: var(--txt2); font-weight: 300; font-size: 14px; max-width: 460px; margin: 0 0 2.5rem; }
@@ -1014,35 +1057,59 @@ body.dark .p-card:not(.feat).p-selected { border-color: #4B7FCC; }
   <h2 class="sec-h2">Todo lo que necesitas<br><em>saber antes de empezar.</em></h2>
   <div class="faq-list">
     <div class="faq-item">
-      <button class="faq-q" aria-expanded="false">¿Mis clientes tienen que descargar una app?</button>
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+        <span class="faq-q-text">¿Mis clientes tienen que descargar una app?</span>
+      </button>
       <div class="faq-a">Las tarjetas de Fieloop viven en Apple Wallet y Google Wallet, que ya vienen instalados en prácticamente todos los celulares. Tu cliente solo escanea un QR o recibe un link y con un tap la tarjeta queda guardada para siempre. Sin descargas, sin contraseñas, sin fricciones.</div>
     </div>
     <div class="faq-item">
-      <button class="faq-q" aria-expanded="false">¿Cuánto tiempo tarda en estar listo mi programa?</button>
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+        <span class="faq-q-text">¿Cuánto tiempo tarda en estar listo mi programa?</span>
+      </button>
       <div class="faq-a">En menos de 48 horas tu tarjeta está activa y funcionando. Tu logo, colores, tipo de tarjeta y recompensa, todo configurado y listo para que tus clientes empiecen a acumular sellos desde el primer día.</div>
     </div>
     <div class="faq-item">
-      <button class="faq-q" aria-expanded="false">¿Cómo le doy un sello a mi cliente?</button>
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+        <span class="faq-q-text">¿Cómo le doy un sello a mi cliente?</span>
+      </button>
       <div class="faq-a">El empleado abre el scanner desde cualquier navegador en el celular o tablet que ya tiene el negocio, sin comprar hardware ni instalar nada adicional. El cliente muestra la tarjeta de su Wallet, el empleado escanea el QR con la cámara del dispositivo y el sello se registra al instante. Así de simple.</div>
     </div>
     <div class="faq-item">
-      <button class="faq-q" aria-expanded="false">¿Qué información obtengo de mis clientes?</button>
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+        <span class="faq-q-text">¿Qué información obtengo de mis clientes?</span>
+      </button>
       <div class="faq-a">Tienes acceso a un dashboard con visitas por cliente, frecuencia de regreso, hora pico de tu negocio, tasa de redención de premios y clientes en riesgo de no volver. Es el mini-CRM que una tarjeta de papel jamás te dará.</div>
     </div>
     <div class="faq-item">
-      <button class="faq-q" aria-expanded="false">¿Puedo tener varios tipos de tarjeta al mismo tiempo?</button>
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+        <span class="faq-q-text">¿Puedo tener varios tipos de tarjeta al mismo tiempo?</span>
+      </button>
       <div class="faq-a">Depende del plan. Con Frecuencia tienes 1 tipo activo. Con Lealtad puedes combinar hasta 3 simultáneamente, por ejemplo punch card para visitas diarias y cashback para ticket alto. Con Crecimiento llegas a 5 tipos activos.</div>
     </div>
     <div class="faq-item">
-      <button class="faq-q" aria-expanded="false">¿Puedo cancelar cuando quiera?</button>
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+        <span class="faq-q-text">¿Puedo cancelar cuando quiera?</span>
+      </button>
       <div class="faq-a">Sí. Sin contratos anuales forzados, sin penalizaciones. Cancelas cuando quieras desde tu panel. Lo único que recomendamos es no cancelar abruptamente si ya tienes clientes activos, ya que sus tarjetas dejarían de funcionar.</div>
     </div>
     <div class="faq-item">
-      <button class="faq-q" aria-expanded="false">¿Los datos de mis clientes son míos?</button>
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+        <span class="faq-q-text">¿Los datos de mis clientes son míos?</span>
+      </button>
       <div class="faq-a">100%. Fieloop es el vehículo, no el dueño. Tu base de clientes te pertenece a ti. Cumplimos con la Ley Federal de Protección de Datos Personales y toda la información viaja encriptada.</div>
     </div>
     <div class="faq-item">
-      <button class="faq-q" aria-expanded="false">¿Funciona igual en Android y en iPhone?</button>
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+        <span class="faq-q-text">¿Funciona igual en Android y en iPhone?</span>
+      </button>
       <div class="faq-a">Sí. Apple Wallet para iPhone y Google Wallet para Android. Ambos funcionan exactamente igual. El cliente guarda la tarjeta con un tap y el empleado escanea el QR desde el dispositivo del negocio. Compatible con más del 95% de los celulares en México.</div>
     </div>
   </div>
@@ -1309,6 +1376,19 @@ document.querySelectorAll('.faq-q').forEach(btn => {
       btn.setAttribute('aria-expanded', 'true');
       btn.nextElementSibling.classList.add('open');
     }
+  });
+});
+
+/* FAQ mouse-tracking glow */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  item.addEventListener('mousemove', function(e) {
+    var r = item.getBoundingClientRect();
+    item.style.setProperty('--fx', (e.clientX - r.left) + 'px');
+    item.style.setProperty('--fy', (e.clientY - r.top) + 'px');
+  });
+  item.addEventListener('mouseleave', function() {
+    item.style.removeProperty('--fx');
+    item.style.removeProperty('--fy');
   });
 });
 </script>
