@@ -92,13 +92,13 @@ body.dark .hero-orb-3{background:radial-gradient(circle,rgba(249,115,22,0.14) 0%
 .iph-hotspot{position:absolute;cursor:pointer;border-radius:8px;z-index:5;left:6.5%;width:87%;transition:transform 0.22s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.22s}
 .iph-hotspot:hover{cursor:pointer;z-index:6}
 .iph-hotspot.hs-active{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,0.18)}
-.iph-banner{position:absolute;left:4%;right:4%;pointer-events:none;opacity:0;z-index:10;transition:opacity 0.15s}
+.iph-banner{position:absolute;left:6.5%;width:87%;pointer-events:none;opacity:0;z-index:10;border-radius:10px;transition:opacity 0.15s}
 .iph-banner.show{opacity:1}
-.iph-banner img{width:100%;display:block;border-radius:12px;filter:drop-shadow(0 14px 44px rgba(0,0,0,0.55))}
-.iph-banner img.bn-in{animation:bnIn 0.36s cubic-bezier(0.34,1.45,0.64,1) forwards}
-.iph-banner img.bn-out{animation:bnOut 0.16s ease-in forwards}
-@keyframes bnIn{0%{transform:scale(0.88);opacity:0}60%{opacity:1}100%{transform:scale(1.07);opacity:1}}
-@keyframes bnOut{0%{transform:scale(1.07);opacity:1}100%{transform:scale(0.88);opacity:0}}
+.iph-banner img{width:100%;height:100%;object-fit:cover;display:block;border-radius:10px}
+.iph-banner img.bn-in{animation:bnIn 0.32s cubic-bezier(0.34,1.45,0.64,1) forwards}
+.iph-banner img.bn-out{animation:bnOut 0.15s ease-in forwards}
+@keyframes bnIn{0%{transform:scale(1);opacity:0;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.20))}100%{transform:scale(1.08);opacity:1;filter:drop-shadow(0 10px 28px rgba(0,0,0,0.48))}}
+@keyframes bnOut{0%{transform:scale(1.08);opacity:1;filter:drop-shadow(0 10px 28px rgba(0,0,0,0.48))}100%{transform:scale(1);opacity:0;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.20))}}
 .hcs-back{width:100%;height:54px;padding:0 14px;display:flex;align-items:center;gap:10px;overflow:hidden;position:relative}
 .hcs-back::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,255,0.07),transparent);pointer-events:none}
 .hcs-gym{background:linear-gradient(135deg,#4A1D8E,#7B3FD4);border-radius:16px 16px 0 0;box-shadow:0 -2px 10px rgba(74,29,142,0.2)}
@@ -1499,8 +1499,9 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
       if(cardOpen)return;
       clearTimeout(hideTimer);
       var c=cards[idx];
-      // Position the overlay at the same vertical slot as the hovered hotspot
+      // Overlay sits at exactly the same position and size as the card row hotspot
       banner.style.top=hotspotEl.style.top;
+      banner.style.height=hotspotEl.style.height;
       bannerImg.classList.remove('bn-in','bn-out');
       bannerImg.src=c.banner;
       bannerImg.alt=c.name;
