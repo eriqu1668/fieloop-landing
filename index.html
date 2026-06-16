@@ -90,16 +90,15 @@ body.dark .hero-orb-3{background:radial-gradient(circle,rgba(249,115,22,0.14) 0%
 .hcv-close{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.48);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;transition:background 0.2s,transform 0.15s;z-index:5;flex-shrink:0}
 .hcv-close:hover{background:rgba(0,0,0,0.72);transform:scale(1.1)}
 .iph-hotspot{position:absolute;cursor:pointer;border-radius:8px;z-index:5;left:6.5%;width:87%;transition:transform 0.22s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.22s}
-.iph-hotspot:hover{transform:scaleX(1.01);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,0.30),0 2px 10px rgba(0,0,0,0.12);z-index:6}
+.iph-hotspot:hover{cursor:pointer;z-index:6}
 .iph-hotspot.hs-active{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,0.18)}
-.hcv-preview{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-start;padding-left:20px;pointer-events:none;opacity:0;transition:opacity 0.18s;z-index:2}
-.hcv-preview.show{opacity:1}
-.hcv-preview-img{width:100%;max-width:500px;transform-origin:left center;border-radius:16px;filter:drop-shadow(0 14px 40px rgba(0,0,0,0.30))}
-.hcv-preview-img.preview-in{animation:bannerIn 0.40s cubic-bezier(0.34,1.45,0.64,1) forwards}
-.hcv-preview-img.preview-out{animation:bannerOut 0.18s ease-in forwards}
-@keyframes bannerIn{0%{transform:scale(0.62) translateX(-28px);opacity:0}65%{opacity:1}100%{transform:scale(1) translateX(0);opacity:1}}
-@keyframes bannerOut{0%{transform:scale(1) translateX(0);opacity:1}100%{transform:scale(0.72) translateX(-20px);opacity:0}}
-.hero-card-viewer.has-preview .hcv-hint{opacity:0}
+.iph-banner{position:absolute;left:4%;right:4%;pointer-events:none;opacity:0;z-index:10;transition:opacity 0.15s}
+.iph-banner.show{opacity:1}
+.iph-banner img{width:100%;display:block;border-radius:12px;filter:drop-shadow(0 14px 44px rgba(0,0,0,0.55))}
+.iph-banner img.bn-in{animation:bnIn 0.36s cubic-bezier(0.34,1.45,0.64,1) forwards}
+.iph-banner img.bn-out{animation:bnOut 0.16s ease-in forwards}
+@keyframes bnIn{0%{transform:scale(0.88);opacity:0}60%{opacity:1}100%{transform:scale(1.07);opacity:1}}
+@keyframes bnOut{0%{transform:scale(1.07);opacity:1}100%{transform:scale(0.88);opacity:0}}
 .hcs-back{width:100%;height:54px;padding:0 14px;display:flex;align-items:center;gap:10px;overflow:hidden;position:relative}
 .hcs-back::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,255,0.07),transparent);pointer-events:none}
 .hcs-gym{background:linear-gradient(135deg,#4A1D8E,#7B3FD4);border-radius:16px 16px 0 0;box-shadow:0 -2px 10px rgba(74,29,142,0.2)}
@@ -653,7 +652,7 @@ html { scroll-behavior: smooth; }
   .sec-contacto::before, .sec-contacto::after { animation: none; }
   .hero-orb { animation: none; }
   .hcv-img.macos-open { animation: none; transform: scale(1); opacity: 1; }
-  .hcv-preview-img.preview-in, .hcv-preview-img.preview-out { animation: none; transform: scale(1); opacity: 1; }
+  .iph-banner img.bn-in, .iph-banner img.bn-out { animation: none; transform: scale(1.07); opacity: 1; }
   .hcv-hint-arrow { animation: none; }
   .iph-hotspot { transition: none; }
   .rv { opacity: 1; transform: none; transition: none; }
@@ -762,15 +761,15 @@ body.dark .p-card:not(.feat).p-selected { border-color: #4B7FCC; }
         <div class="iph-hotspot" data-card="6" style="top:67.7%;height:9.7%"></div>
         <div class="iph-hotspot" data-card="7" style="top:77.4%;height:9.7%"></div>
         <div class="iph-hotspot" data-card="8" style="top:87.1%;height:9.0%"></div>
+        <div class="iph-banner" id="iphBanner">
+          <img id="iphBannerImg" src="" alt="">
+        </div>
       </div>
       <div class="hero-card-viewer" id="heroCardViewer">
         <div class="hcv-hint" id="hcvHint">
           <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="3"/><path d="M8 21h8M12 17v4"/><path d="M9 9l2 2 4-4"/></svg>
           <p>Toca una tarjeta<br>para expandirla</p>
           <span class="hcv-hint-arrow">←</span>
-        </div>
-        <div class="hcv-preview" id="hcvPreview">
-          <img class="hcv-preview-img" id="hcvPreviewImg" src="" alt="">
         </div>
         <div class="hcv-display" id="hcvDisplay">
           <img class="hcv-img" id="hcvImg" src="" alt="">
@@ -1490,39 +1489,40 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
     var display=document.getElementById('hcvDisplay');
     var img=document.getElementById('hcvImg');
     var closeBtn=document.getElementById('hcvClose');
-    var previewEl=document.getElementById('hcvPreview');
-    var previewImg=document.getElementById('hcvPreviewImg');
-    if(!viewer||!display||!img||!closeBtn||!previewEl||!previewImg)return;
+    var banner=document.getElementById('iphBanner');
+    var bannerImg=document.getElementById('iphBannerImg');
+    if(!viewer||!display||!img||!closeBtn||!banner||!bannerImg)return;
     var cardOpen=false;
-    var previewTimer=null;
+    var hideTimer=null;
 
-    function showPreview(idx){
+    function showPreview(idx,hotspotEl){
       if(cardOpen)return;
+      clearTimeout(hideTimer);
       var c=cards[idx];
-      previewImg.classList.remove('preview-in','preview-out');
-      previewImg.src=c.banner;
-      previewImg.alt=c.name;
-      void previewImg.offsetWidth;
-      previewImg.classList.add('preview-in');
-      previewEl.classList.add('show');
-      viewer.classList.add('has-preview');
+      // Position the overlay at the same vertical slot as the hovered hotspot
+      banner.style.top=hotspotEl.style.top;
+      bannerImg.classList.remove('bn-in','bn-out');
+      bannerImg.src=c.banner;
+      bannerImg.alt=c.name;
+      void bannerImg.offsetWidth;
+      bannerImg.classList.add('bn-in');
+      banner.classList.add('show');
     }
 
     function hidePreview(animate){
-      if(!previewEl.classList.contains('show'))return;
+      if(!banner.classList.contains('show'))return;
       if(animate){
-        previewImg.classList.remove('preview-in');
-        void previewImg.offsetWidth;
-        previewImg.classList.add('preview-out');
-        clearTimeout(previewTimer);
-        previewTimer=setTimeout(function(){
-          previewEl.classList.remove('show');
-          viewer.classList.remove('has-preview');
-        },200);
+        bannerImg.classList.remove('bn-in');
+        void bannerImg.offsetWidth;
+        bannerImg.classList.add('bn-out');
+        clearTimeout(hideTimer);
+        hideTimer=setTimeout(function(){
+          banner.classList.remove('show');
+          bannerImg.classList.remove('bn-out');
+        },180);
       }else{
-        previewEl.classList.remove('show');
-        viewer.classList.remove('has-preview');
-        previewImg.classList.remove('preview-in','preview-out');
+        banner.classList.remove('show');
+        bannerImg.classList.remove('bn-in','bn-out');
       }
     }
 
@@ -1560,7 +1560,7 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
     }
 
     document.querySelectorAll('.iph-hotspot').forEach(function(h){
-      h.addEventListener('mouseenter',function(){showPreview(parseInt(this.dataset.card,10))});
+      h.addEventListener('mouseenter',function(){showPreview(parseInt(this.dataset.card,10),this)});
       h.addEventListener('mouseleave',function(){if(!cardOpen)hidePreview(true)});
       h.addEventListener('click',function(){openCard(parseInt(this.dataset.card,10),this)});
     });
