@@ -75,6 +75,25 @@ body.dark .hero-orb-3{background:radial-gradient(circle,rgba(249,115,22,0.14) 0%
 .iph-dot{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,0.12)}
 .iph-dot.active{background:var(--o)}
 .hero-cardstack{display:flex;flex-direction:column;width:195px}
+.hero-card-viewer{display:flex;align-items:center;justify-content:center;width:340px;min-height:480px;position:relative}
+.hcv-hint{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--txt3);text-align:center;transition:opacity 0.3s;pointer-events:none}
+.hcv-hint svg{opacity:0.35}
+.hcv-hint p{font-size:13px;line-height:1.6;margin:0}
+.hcv-hint-arrow{font-size:20px;opacity:0.4;animation:hintPulse 2s ease-in-out infinite}
+@keyframes hintPulse{0%,100%{transform:translateX(0);opacity:0.4}50%{transform:translateX(-8px);opacity:0.75}}
+.hero-card-viewer.has-card .hcv-hint{opacity:0}
+.hcv-display{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity 0.25s}
+.hcv-display.open{pointer-events:auto;opacity:1}
+.hcv-img{width:100%;max-width:320px;border-radius:20px;box-shadow:0 28px 70px rgba(0,0,0,0.18),0 4px 18px rgba(0,0,0,0.1);transform-origin:left center}
+.hcv-img.macos-open{animation:macOSOpen 0.44s cubic-bezier(0.34,1.45,0.64,1) forwards}
+@keyframes macOSOpen{0%{transform:scale(0.08);opacity:0}50%{opacity:1}100%{transform:scale(1);opacity:1}}
+.hcv-close{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.48);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;transition:background 0.2s,transform 0.15s;z-index:5;flex-shrink:0}
+.hcv-close:hover{background:rgba(0,0,0,0.72);transform:scale(1.1)}
+.iph-hotspot{position:absolute;cursor:pointer;border-radius:5px;z-index:5;left:6.5%;width:87%;transition:background 0.15s,transform 0.18s cubic-bezier(0.34,1.56,0.64,1)}
+.iph-hotspot:hover{background:rgba(255,255,255,0.22);transform:scale(1.018)}
+.iph-hotspot.hs-active{background:rgba(255,255,255,0.30)}
+body.dark .iph-hotspot:hover{background:rgba(255,255,255,0.15)}
+body.dark .iph-hotspot.hs-active{background:rgba(255,255,255,0.20)}
 .hcs-back{width:100%;height:54px;padding:0 14px;display:flex;align-items:center;gap:10px;overflow:hidden;position:relative}
 .hcs-back::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,255,0.07),transparent);pointer-events:none}
 .hcs-gym{background:linear-gradient(135deg,#4A1D8E,#7B3FD4);border-radius:16px 16px 0 0;box-shadow:0 -2px 10px rgba(74,29,142,0.2)}
@@ -627,6 +646,9 @@ html { scroll-behavior: smooth; }
   .sec-contacto, .sec-como { animation: none; }
   .sec-contacto::before, .sec-contacto::after { animation: none; }
   .hero-orb { animation: none; }
+  .hcv-img.macos-open { animation: none; transform: scale(1); opacity: 1; }
+  .hcv-hint-arrow { animation: none; }
+  .iph-hotspot { transition: none; }
   .rv { opacity: 1; transform: none; transition: none; }
   .btn-p, .btn-s, .nav-cta, .f-submit,
   .prob-card, .paso, .p-card,
@@ -724,9 +746,28 @@ body.dark .p-card:not(.feat).p-selected { border-color: #4B7FCC; }
     <div class="hero-phones">
       <div class="hero-iphone">
         <img src="https://raw.githubusercontent.com/eriqu1668/fieloop-landing/main/hero-phone.png?v=3" alt="Fieloop wallet — tarjetas de lealtad de múltiples negocios" style="width:300px;display:block;filter:drop-shadow(0 32px 64px rgba(0,0,0,0.22)) drop-shadow(0 8px 24px rgba(0,0,0,0.14))">
+        <div class="iph-hotspot" data-card="0" style="top:9.5%;height:9.7%"></div>
+        <div class="iph-hotspot" data-card="1" style="top:19.2%;height:9.7%"></div>
+        <div class="iph-hotspot" data-card="2" style="top:28.9%;height:9.7%"></div>
+        <div class="iph-hotspot" data-card="3" style="top:38.6%;height:9.7%"></div>
+        <div class="iph-hotspot" data-card="4" style="top:48.3%;height:9.7%"></div>
+        <div class="iph-hotspot" data-card="5" style="top:58.0%;height:9.7%"></div>
+        <div class="iph-hotspot" data-card="6" style="top:67.7%;height:9.7%"></div>
+        <div class="iph-hotspot" data-card="7" style="top:77.4%;height:9.7%"></div>
+        <div class="iph-hotspot" data-card="8" style="top:87.1%;height:9.0%"></div>
       </div>
-      <div class="hero-cardstack">
-        <img src="https://raw.githubusercontent.com/eriqu1668/fieloop-landing/main/hero-cards.png?v=2" alt="Tarjetas de lealtad Fieloop" style="width:340px;display:block;filter:drop-shadow(0 16px 40px rgba(0,0,0,0.18))">
+      <div class="hero-card-viewer" id="heroCardViewer">
+        <div class="hcv-hint" id="hcvHint">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="3"/><path d="M8 21h8M12 17v4"/><path d="M9 9l2 2 4-4"/></svg>
+          <p>Toca una tarjeta<br>para expandirla</p>
+          <span class="hcv-hint-arrow">←</span>
+        </div>
+        <div class="hcv-display" id="hcvDisplay">
+          <img class="hcv-img" id="hcvImg" src="" alt="">
+          <button class="hcv-close" id="hcvClose" aria-label="Cerrar tarjeta">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -1421,6 +1462,50 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
     }
   });
 })();
+
+  // ── Hero card viewer ──
+  (function(){
+    var cards=[
+      {name:'Barbería Club',src:'https://raw.githubusercontent.com/eriqu1668/fieloop-landing/main/Card-BarberiaCLUB.png'},
+      {name:'Bella Luna',src:'https://raw.githubusercontent.com/eriqu1668/fieloop-landing/main/Card-BellaLuna.png'},
+      {name:'The Burger House',src:'https://raw.githubusercontent.com/eriqu1668/fieloop-landing/main/Card-TheBurgerHouse.png'},
+      {name:'Sushi Zen',src:'https://raw.githubusercontent.com/eriqu1668/fieloop-landing/main/Card-SushiZen.png'},
+      {name:'Café Origen',src:'https://raw.githubusercontent.com/eriqu1668/fieloop-landing/main/Card-CafeOrigen.png'},
+      {name:'Pizza Roma',src:'https://raw.githubusercontent.com/eriqu1668/fieloop-landing/main/Card-PizzaRoma.png'},
+      {name:'Fitzone',src:'https://raw.githubusercontent.com/eriqu1668/fieloop-landing/main/Card-FITZONE.png'},
+      {name:'Lavanda',src:'https://raw.githubusercontent.com/eriqu1668/fieloop-landing/main/Card-Lavanda.png'},
+      {name:'Verde Vida',src:'https://raw.githubusercontent.com/eriqu1668/fieloop-landing/main/Card-VerdeVida.png'}
+    ];
+    var viewer=document.getElementById('heroCardViewer');
+    var display=document.getElementById('hcvDisplay');
+    var img=document.getElementById('hcvImg');
+    var closeBtn=document.getElementById('hcvClose');
+    if(!viewer||!display||!img||!closeBtn)return;
+    function openCard(idx){
+      var card=cards[idx];
+      img.classList.remove('macos-open');
+      display.classList.remove('open');
+      void img.offsetWidth;
+      img.src=card.src;
+      img.alt=card.name;
+      display.classList.add('open');
+      viewer.classList.add('has-card');
+      void img.offsetWidth;
+      img.classList.add('macos-open');
+      document.querySelectorAll('.iph-hotspot').forEach(function(h){h.classList.remove('hs-active')});
+      var active=document.querySelector('.iph-hotspot[data-card="'+idx+'"]');
+      if(active)active.classList.add('hs-active');
+    }
+    function closeCard(){
+      display.classList.remove('open');
+      viewer.classList.remove('has-card');
+      document.querySelectorAll('.iph-hotspot').forEach(function(h){h.classList.remove('hs-active')});
+    }
+    document.querySelectorAll('.iph-hotspot').forEach(function(h){
+      h.addEventListener('click',function(){openCard(parseInt(this.dataset.card,10))});
+    });
+    closeBtn.addEventListener('click',closeCard);
+  })();
 </script>
 </body>
 </html>
