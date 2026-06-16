@@ -386,7 +386,8 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
   .demo-controls-col { order: 3; }
 }
 .sec-faq { background: var(--w2); border-top: 1px solid var(--w3); border-bottom: 1px solid var(--w3); padding: 5rem 5%; }
-.faq-list { display: flex; flex-direction: column; gap: 0.65rem; margin-top: 2.5rem; }
+.faq-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-top: 2.5rem; align-items: start; }
+@media(max-width:768px) { .faq-list { grid-template-columns: 1fr; } }
 
 /* FAQ card */
 .faq-item {
