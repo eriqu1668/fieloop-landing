@@ -584,6 +584,49 @@ html { scroll-behavior: smooth; }
   .precios-grid.pv-in .p-card:first-child,
   .precios-grid.pv-in .p-card:last-child,
   .precios-grid.pv-in .p-card.feat { transform: none; }
+  .precios-grid .p-card.p-selected,
+  .precios-grid .p-card.p-small { transform: none; transition: none; }
+}
+
+/* --- Precios: card selection --- */
+.p-card { cursor: pointer; }
+
+/* Blue highlight on non-featured cards when selected */
+.p-card:not(.feat).p-selected {
+  border-color: var(--b);
+  border-width: 2px;
+  box-shadow: 0 6px 28px rgba(18,35,79,0.14);
+}
+body.dark .p-card:not(.feat).p-selected { border-color: #4B7FCC; }
+
+@media (min-width: 769px) {
+  /* Selected card: lifts like Lealtad */
+  .precios-grid .p-card.p-selected,
+  .precios-grid.pv-in .p-card.p-selected,
+  .precios-grid.pv-in .p-card:first-child.p-selected,
+  .precios-grid.pv-in .p-card:last-child.p-selected {
+    transform: translateY(-20px);
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1),
+                box-shadow 0.3s, border-color 0.2s;
+  }
+  /* Small cards: tighter scale than pv-in default */
+  .precios-grid .p-card.p-small,
+  .precios-grid.pv-in .p-card.p-small,
+  .precios-grid.pv-in .p-card:first-child.p-small,
+  .precios-grid.pv-in .p-card:last-child.p-small {
+    transform: scale(0.91) translateY(6px);
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+  }
+  /* Hover on selected */
+  .precios-grid .p-card.p-selected:hover,
+  .precios-grid.pv-in .p-card.p-selected:hover,
+  .precios-grid.pv-in .p-card:first-child.p-selected:hover,
+  .precios-grid.pv-in .p-card:last-child.p-selected:hover { transform: translateY(-24px); }
+  /* Hover on small */
+  .precios-grid .p-card.p-small:hover,
+  .precios-grid.pv-in .p-card.p-small:hover,
+  .precios-grid.pv-in .p-card:first-child.p-small:hover,
+  .precios-grid.pv-in .p-card:last-child.p-small:hover { transform: scale(0.91) translateY(2px); }
 }
 </style>
 </head>
@@ -1048,7 +1091,7 @@ html { scroll-behavior: smooth; }
       </div>
       <div class="f-group">
         <label>Plan de interés</label>
-        <select>
+        <select id="plan-select">
           <option value="">Selecciona...</option>
           <option>Frecuencia · $499/mes</option>
           <option>Lealtad · $899/mes</option>
@@ -1463,6 +1506,52 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     });
   }, { threshold: 0.25 });
   pvIo.observe(grid);
+})();
+</script>
+
+<script>
+/* Precios: card selection + CTA auto-fill */
+(function(){
+  var cards      = document.querySelectorAll('#precios-grid .p-card');
+  var planSelect = document.getElementById('plan-select');
+  if (!cards.length) return;
+
+  function selectCard(chosen) {
+    cards.forEach(function(card) {
+      card.classList.remove('p-selected', 'p-small');
+      card.classList.add(card === chosen ? 'p-selected' : 'p-small');
+    });
+  }
+
+  function prefillPlan(card) {
+    if (!planSelect) return;
+    var tier = card.querySelector('.p-tier');
+    if (!tier) return;
+    var name = tier.textContent.trim();
+    for (var i = 0; i < planSelect.options.length; i++) {
+      if (planSelect.options[i].text.indexOf(name) === 0) {
+        planSelect.selectedIndex = i;
+        break;
+      }
+    }
+  }
+
+  cards.forEach(function(card) {
+    /* Click card → select it */
+    card.addEventListener('click', function() {
+      selectCard(card);
+    });
+
+    /* Click CTA → also pre-fill plan dropdown (scroll handled by href="#contacto") */
+    var cta = card.querySelector('.p-cta');
+    if (cta) {
+      cta.addEventListener('click', function(e) {
+        e.stopPropagation();
+        selectCard(card);
+        prefillPlan(card);
+      });
+    }
+  });
 })();
 </script>
 </body>
