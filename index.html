@@ -556,31 +556,8 @@ html { scroll-behavior: smooth; }
 }
 .faq-q:hover { color: var(--o); }
 
-/* --- Precios toggle & card elevation --- */
-.precios-desc { color: var(--txt2); font-weight: 300; font-size: 14px; max-width: 460px; margin: 0 0 1.8rem; }
-.precios-toggle-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 2.5rem; }
-.toggle-label { font-size: 13px; font-weight: 500; color: var(--txt2); }
-.toggle-save { color: var(--o); font-weight: 600; }
-.p-toggle {
-  width: 44px; height: 24px; border-radius: 12px;
-  background: var(--w4); border: none; cursor: pointer;
-  position: relative; padding: 0; flex-shrink: 0;
-  transition: background 0.3s cubic-bezier(0.22,1,0.36,1);
-}
-.p-toggle:focus-visible { box-shadow: 0 0 0 3px rgba(249,115,22,0.30); outline: none; }
-.p-toggle.on { background: var(--o); }
-.p-toggle-thumb {
-  position: absolute; top: 2px; left: 2px;
-  width: 20px; height: 20px; border-radius: 50%;
-  background: #fff; pointer-events: none;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.20);
-  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
-}
-.p-toggle.on .p-toggle-thumb { transform: translateX(20px); }
-.p-billing { font-size: 11px; color: var(--txt3); margin-bottom: 1rem; transition: opacity 0.2s; }
-body.dark .p-toggle { background: #1E2D45; }
-body.dark .p-toggle.on { background: var(--o); }
-body.dark .p-billing { color: rgba(250,252,255,0.35); }
+/* --- Precios card elevation --- */
+.precios-desc { color: var(--txt2); font-weight: 300; font-size: 14px; max-width: 460px; margin: 0 0 2.5rem; }
 
 /* Card elevation on desktop (viewport-triggered) */
 @media (min-width: 769px) {
@@ -939,20 +916,11 @@ body.dark .p-billing { color: rgba(250,252,255,0.35); }
   <h2 class="sec-h2">Elige según<br><em>tu meta.</em></h2>
   <p class="precios-desc">Primer mes completamente gratis. Sin contratos. Cancela cuando quieras.</p>
 
-  <div class="precios-toggle-wrap">
-    <span class="toggle-label">Mensual</span>
-    <button class="p-toggle" id="p-toggle" role="switch" aria-checked="false" aria-label="Cambiar a facturación anual">
-      <span class="p-toggle-thumb"></span>
-    </button>
-    <span class="toggle-label">Anual&nbsp;<span class="toggle-save">(Ahorra 20%)</span></span>
-  </div>
-
   <div class="precios-grid" id="precios-grid">
     <div class="p-card">
       <div class="p-tier">Frecuencia</div>
       <div class="p-precio"><sup>$</sup><span class="p-num" data-m="499" data-a="399">499</span></div>
       <div class="p-sub">MXN/mes + IVA</div>
-      <div class="p-billing">facturado mensualmente</div>
       <div class="p-meta">Para arrancar sin riesgo</div>
       <ul class="p-features">
         <li>1 tarjeta activa (punch card)</li>
@@ -970,7 +938,6 @@ body.dark .p-billing { color: rgba(250,252,255,0.35); }
       <div class="p-tier">Lealtad</div>
       <div class="p-precio"><sup>$</sup><span class="p-num" data-m="899" data-a="719">899</span></div>
       <div class="p-sub">MXN/mes + IVA</div>
-      <div class="p-billing">facturado mensualmente</div>
       <div class="p-meta">Para negocios que quieren crecer</div>
       <ul class="p-features">
         <li>3 tipos de tarjeta simultánea</li>
@@ -988,7 +955,6 @@ body.dark .p-billing { color: rgba(250,252,255,0.35); }
       <div class="p-tier">Crecimiento</div>
       <div class="p-precio"><sup>$</sup><span class="p-num" data-m="1599" data-a="1279">1,599</span></div>
       <div class="p-sub">MXN/mes + IVA</div>
-      <div class="p-billing">facturado mensualmente</div>
       <div class="p-meta">Para cadenas y múltiples sucursales</div>
       <ul class="p-features">
         <li>5 tipos de tarjeta activa</li>
@@ -1475,73 +1441,18 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 })();
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <script>
-/* Precios: toggle billing + animated numbers + confetti + card elevation */
+/* Precios: card elevation on scroll */
 (function(){
-  var toggle   = document.getElementById('p-toggle');
-  var grid     = document.getElementById('precios-grid');
-  var nums     = document.querySelectorAll('.p-num');
-  var billings = document.querySelectorAll('.p-billing');
-  if (!toggle) return;
-
-  var isAnnual = false;
-  var reduced  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* Smooth number counter */
-  function animateNum(el, from, to) {
-    if (reduced) { el.textContent = to.toLocaleString('es-MX'); return; }
-    var start = null, dur = 420;
-    (function step(ts) {
-      if (!start) start = ts;
-      var t = Math.min((ts - start) / dur, 1);
-      var ease = 1 - Math.pow(1 - t, 3);
-      el.textContent = Math.round(from + (to - from) * ease).toLocaleString('es-MX');
-      if (t < 1) requestAnimationFrame(step);
-    })(performance.now());
-  }
-
-  /* Confetti burst from switch position */
-  function fireConfetti() {
-    if (typeof confetti === 'undefined') return;
-    var r = toggle.getBoundingClientRect();
-    confetti({
-      particleCount: 60,
-      spread: 70,
-      origin: { x: (r.left + r.width / 2) / innerWidth, y: (r.top + r.height / 2) / innerHeight },
-      colors: ['#F97316', '#12234F', '#FAFCFF', '#E0E8F8'],
-      ticks: 200, gravity: 1.2, decay: 0.94, startVelocity: 28,
-      shapes: ['circle']
+  var grid    = document.getElementById('precios-grid');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!grid || reduced) return;
+  var pvIo = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('pv-in'); pvIo.unobserve(e.target); }
     });
-  }
-
-  toggle.addEventListener('click', function() {
-    isAnnual = !isAnnual;
-    toggle.classList.toggle('on', isAnnual);
-    toggle.setAttribute('aria-checked', isAnnual ? 'true' : 'false');
-
-    nums.forEach(function(el) {
-      var from = parseInt(el.textContent.replace(/\D/g, ''), 10);
-      var to   = parseInt(isAnnual ? el.dataset.a : el.dataset.m, 10);
-      animateNum(el, from, to);
-    });
-
-    billings.forEach(function(el) {
-      el.textContent = isAnnual ? 'facturado anualmente' : 'facturado mensualmente';
-    });
-
-    if (isAnnual) fireConfetti();
-  });
-
-  /* Card elevation: add .pv-in to grid when it enters the viewport */
-  if (grid && !reduced) {
-    var pvIo = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) { e.target.classList.add('pv-in'); pvIo.unobserve(e.target); }
-      });
-    }, { threshold: 0.25 });
-    pvIo.observe(grid);
-  }
+  }, { threshold: 0.25 });
+  pvIo.observe(grid);
 })();
 </script>
 </body>
