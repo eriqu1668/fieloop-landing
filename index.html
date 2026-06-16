@@ -121,7 +121,8 @@ body.dark .dic-desc{color:#A0B4CC}
 body.dark .dic-result{border-top-color:#1E2D45}
 body.dark .demo-nombre-input{background:#0F1520;border-color:#1E2D45;color:#E8EEF8}
 body.dark .demo-nombre-input::placeholder{color:#3A4F6A}
-body.dark .sec-precios{background:#141D2E;border-top-color:#1E2D45;border-bottom-color:#1E2D45}
+body.dark .sec-precios{background:#141D2E;border-top-color:#1E2D45;border-bottom-color:#1E2D45;animation:preciosGradientDark 16s ease infinite}
+@keyframes preciosGradientDark{0%{background:linear-gradient(150deg,#141D2E 0%,#0F1520 50%,#141D2E 100%)}33%{background:linear-gradient(150deg,#0F1520 0%,#141D2E 50%,#1A2435 100%)}66%{background:linear-gradient(150deg,#1A2435 0%,#141D2E 50%,#0F1520 100%)}100%{background:linear-gradient(150deg,#141D2E 0%,#0F1520 50%,#141D2E 100%)}}
 body.dark .p-card{background:#0F1520;border-color:#1E2D45}
 body.dark .p-card.feat{border-color:#F97316}
 body.dark .p-precio{color:#E8EEF8}
@@ -247,7 +248,8 @@ body.dark .anim-wallet-plus{background:#2A2A2A;color:#FAFCFF}
 .sello.v{background:transparent;border:1px solid var(--b3)}
 .w-meta{font-size:8px;color:rgba(250,252,255,0.3)}
 .scan-btn{width:100%;background:rgba(249,115,22,0.15);border:1.5px solid #F97316;border-radius:6px;padding:7px;text-align:center;font-size:10px;color:#F97316;font-weight:700;margin-top:4px;letter-spacing:0.04em}
-.sec-precios{background:var(--w3);padding:5rem 5%;border-top:1px solid var(--w4);border-bottom:1px solid var(--w4)}
+.sec-precios{background:var(--w3);padding:5rem 5%;border-top:1px solid var(--w4);border-bottom:1px solid var(--w4);animation:preciosGradient 16s ease infinite}
+@keyframes preciosGradient{0%{background:linear-gradient(150deg,#EEF3FD 0%,#E8F0FA 50%,#EEF3FD 100%)}33%{background:linear-gradient(150deg,#E8F0FA 0%,#EEF3FD 50%,#E4EDF8 100%)}66%{background:linear-gradient(150deg,#E4EDF8 0%,#EBF1FB 50%,#EEF3FD 100%)}100%{background:linear-gradient(150deg,#EEF3FD 0%,#E8F0FA 50%,#EEF3FD 100%)}}
 .precios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
 .p-card{background:var(--w);border:1px solid var(--w4);border-radius:6px;padding:2rem;position:relative;transition:box-shadow 0.2s}
 .p-card:hover{box-shadow:0 4px 24px rgba(18,35,79,0.08)}
