@@ -587,8 +587,7 @@ html { scroll-behavior: smooth; }
   .precios-grid.pv-in .p-card:first-child,
   .precios-grid.pv-in .p-card:last-child,
   .precios-grid.pv-in .p-card.feat { transform: none; }
-  .precios-grid .p-card.p-selected,
-  .precios-grid .p-card.p-small { transform: none; transition: none; }
+  .precios-grid .p-card.p-selected { transform: none; transition: none; }
 }
 
 /* --- Precios: card selection --- */
@@ -612,24 +611,11 @@ body.dark .p-card:not(.feat).p-selected { border-color: #4B7FCC; }
     transition: transform 0.4s cubic-bezier(0.22,1,0.36,1),
                 box-shadow 0.3s, border-color 0.2s;
   }
-  /* Small cards: tighter scale than pv-in default */
-  .precios-grid .p-card.p-small,
-  .precios-grid.pv-in .p-card.p-small,
-  .precios-grid.pv-in .p-card:first-child.p-small,
-  .precios-grid.pv-in .p-card:last-child.p-small {
-    transform: scale(0.91) translateY(6px);
-    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
-  }
   /* Hover on selected */
   .precios-grid .p-card.p-selected:hover,
   .precios-grid.pv-in .p-card.p-selected:hover,
   .precios-grid.pv-in .p-card:first-child.p-selected:hover,
   .precios-grid.pv-in .p-card:last-child.p-selected:hover { transform: translateY(-24px); }
-  /* Hover on small */
-  .precios-grid .p-card.p-small:hover,
-  .precios-grid.pv-in .p-card.p-small:hover,
-  .precios-grid.pv-in .p-card:first-child.p-small:hover,
-  .precios-grid.pv-in .p-card:last-child.p-small:hover { transform: scale(0.91) translateY(2px); }
 }
 </style>
 </head>
@@ -1521,8 +1507,7 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 
   function selectCard(chosen) {
     cards.forEach(function(card) {
-      card.classList.remove('p-selected', 'p-small');
-      card.classList.add(card === chosen ? 'p-selected' : 'p-small');
+      card.classList.toggle('p-selected', card === chosen);
     });
   }
 
