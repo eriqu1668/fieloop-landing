@@ -643,6 +643,10 @@ html { scroll-behavior: smooth; }
   border-width: 2px;
   box-shadow: 0 6px 28px rgba(18,35,79,0.14);
 }
+/* Keep blue glow on hover even when selected (specificity fix) */
+.p-card:not(.feat).p-selected:hover {
+  box-shadow: 0 10px 44px rgba(18,35,79,0.45);
+}
 body.dark .p-card:not(.feat).p-selected { border-color: #4B7FCC; }
 
 @media (min-width: 769px) {
@@ -660,6 +664,16 @@ body.dark .p-card:not(.feat).p-selected { border-color: #4B7FCC; }
   .precios-grid.pv-in .p-card.p-selected:hover,
   .precios-grid.pv-in .p-card:first-child.p-selected:hover,
   .precios-grid.pv-in .p-card:last-child.p-selected:hover { transform: translateY(-24px); }
+
+  /* Lealtad (.feat) shrinks when a different card is selected */
+  .precios-grid.pv-in:has(.p-selected) .p-card.feat:not(.p-selected) {
+    transform: scale(0.955) translateY(2px);
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+  }
+  .precios-grid.pv-in:has(.p-selected) .p-card.feat:not(.p-selected):hover {
+    transform: scale(0.955) translateY(-2px);
+    box-shadow: 0 12px 40px rgba(249,115,22,0.25);
+  }
 }
 </style>
 </head>
