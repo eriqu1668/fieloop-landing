@@ -1660,7 +1660,6 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
     var hideTimer=null;
 
     function showPreview(idx,hotspotEl){
-      if(cardOpen)return;
       clearTimeout(hideTimer);
       var c=cards[idx];
       // Overlay sits at exactly the same position and size as the card row hotspot
@@ -1726,7 +1725,7 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
 
     document.querySelectorAll('.iph-hotspot').forEach(function(h){
       h.addEventListener('mouseenter',function(){showPreview(parseInt(this.dataset.card,10),this)});
-      h.addEventListener('mouseleave',function(){if(!cardOpen)hidePreview(true)});
+      h.addEventListener('mouseleave',function(){hidePreview(true)});
       h.addEventListener('click',function(){openCard(parseInt(this.dataset.card,10),this)});
     });
     closeBtn.addEventListener('click',closeCard);
