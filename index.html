@@ -1594,6 +1594,12 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
     });
   }
 
+  function deselectAll() {
+    cards.forEach(function(card) {
+      card.classList.remove('p-selected');
+    });
+  }
+
   function prefillPlan(card) {
     if (!planSelect) return;
     var tier = card.querySelector('.p-tier');
@@ -1608,9 +1614,13 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
   }
 
   cards.forEach(function(card) {
-    /* Click card → select it */
+    /* Click card → select it, click again → deselect it */
     card.addEventListener('click', function() {
-      selectCard(card);
+      if (card.classList.contains('p-selected')) {
+        deselectAll();
+      } else {
+        selectCard(card);
+      }
     });
 
     /* Click CTA → also pre-fill plan dropdown (scroll handled by href="#contacto") */
