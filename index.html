@@ -98,15 +98,14 @@ body.dark .hero-orb-3{background:radial-gradient(circle,rgba(249,115,22,0.14) 0%
 .hero-card-viewer.has-card .hcv-hint{opacity:0}
 .hcv-display{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-start;padding-left:6px;pointer-events:none;opacity:0;transition:opacity 0.25s}
 .hcv-display.open{pointer-events:auto;opacity:1}
-.hcv-card-wrap{position:relative;width:100%;max-width:540px}
+.hcv-card-wrap{position:relative;width:100%;max-width:540px;transform:translateX(-28px)}
 .hcv-img{display:block;width:100%;transform-origin:left center;filter:drop-shadow(0 18px 50px rgba(0,0,0,0.32))}
 .hcv-img.macos-open{animation:macOSOpen 0.46s cubic-bezier(0.34,1.45,0.64,1) forwards}
 @keyframes macOSOpen{0%{transform:translate(var(--fly-x,-180px),var(--fly-y,0)) scale(0.10);opacity:0}55%{opacity:1}100%{transform:translate(0,0) scale(1);opacity:1}}
-.hcv-close{position:absolute;top:18px;right:46px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.48);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;transition:background 0.2s,transform 0.15s;z-index:5;flex-shrink:0}
+.hcv-close{position:absolute;top:18px;left:46px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.48);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;transition:background 0.2s,transform 0.15s;z-index:5;flex-shrink:0}
 .hcv-close:hover{background:rgba(0,0,0,0.72);transform:scale(1.1)}
 .iph-hotspot{position:absolute;cursor:pointer;border-radius:8px;z-index:5;left:13%;width:74%;transition:transform 0.22s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.22s}
 .iph-hotspot:hover{cursor:pointer;z-index:6}
-.iph-hotspot.hs-active{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,0.18)}
 .iph-banner{position:absolute;left:6%;width:88%;pointer-events:none;opacity:0;z-index:10;border-radius:10px;overflow:hidden;transition:opacity 0.15s}
 .iph-banner.show{opacity:1}
 .iph-banner img{width:100%;height:100%;object-fit:cover;display:block;border-radius:10px}
@@ -141,6 +140,7 @@ body.dark .hero-orb-3{background:radial-gradient(circle,rgba(249,115,22,0.14) 0%
 
 /* Liquid glass effect: applied to all CTA buttons (logo, nav links, theme toggle and FAQ buttons are intentionally excluded) */
 .btn-p,.btn-s,.nav-cta,.p-cta,.f-submit,.wa-btn,.demo-giro-btn,.hcv-close{position:relative;isolation:isolate;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 6px 16px rgba(18,35,79,0.14),inset 1px 1px 1px 0 rgba(255,255,255,0.55),inset -1px -1px 1px 0 rgba(255,255,255,0.22)}
+.hcv-close{position:absolute}
 .btn-p::before,.btn-s::before,.nav-cta::before,.p-cta::before,.f-submit::before,.wa-btn::before,.demo-giro-btn::before,.hcv-close::before{content:'';position:absolute;inset:0;z-index:-1;border-radius:inherit;backdrop-filter:blur(2px) url(#glass-distortion);-webkit-backdrop-filter:blur(2px);pointer-events:none}
 .p-cta:hover,.wa-btn:hover{transform:translateY(-1px) scale(1.02)}
 .p-cta:active,.wa-btn:active,.hcv-close:active{transform:scale(0.96)}
