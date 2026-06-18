@@ -1657,6 +1657,7 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
     var bannerImg=document.getElementById('iphBannerImg');
     if(!viewer||!display||!img||!closeBtn||!banner||!bannerImg)return;
     var cardOpen=false;
+    var openIdx=null;
     var hideTimer=null;
 
     function showPreview(idx,hotspotEl){
@@ -1691,8 +1692,9 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
     }
 
     function openCard(idx,hotspotEl){
-      hidePreview(false);
       cardOpen=true;
+      openIdx=idx;
+      showPreview(idx,hotspotEl);
       var c=cards[idx];
       img.classList.remove('macos-open');
       display.classList.remove('open');
@@ -1718,6 +1720,8 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
 
     function closeCard(){
       cardOpen=false;
+      openIdx=null;
+      hidePreview(true);
       display.classList.remove('open');
       viewer.classList.remove('has-card');
       document.querySelectorAll('.iph-hotspot').forEach(function(h){h.classList.remove('hs-active')});
@@ -1725,7 +1729,13 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
 
     document.querySelectorAll('.iph-hotspot').forEach(function(h){
       h.addEventListener('mouseenter',function(){showPreview(parseInt(this.dataset.card,10),this)});
-      h.addEventListener('mouseleave',function(){hidePreview(true)});
+      h.addEventListener('mouseleave',function(){
+        if(openIdx!==null){
+          var activeHotspot=document.querySelector('.iph-hotspot[data-card="'+openIdx+'"]');
+          if(activeHotspot){showPreview(openIdx,activeHotspot);return}
+        }
+        hidePreview(true);
+      });
       h.addEventListener('click',function(){openCard(parseInt(this.dataset.card,10),this)});
     });
     closeBtn.addEventListener('click',closeCard);
