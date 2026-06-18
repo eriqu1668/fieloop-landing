@@ -27,8 +27,8 @@ nav.scrolled{background:rgba(18,35,79,0.86);backdrop-filter:blur(14px);-webkit-b
 .nav-links-main{display:flex;gap:24px;align-items:center}
 .nav-links a{font-size:13px;color:rgba(250,252,255,0.45);text-decoration:none;transition:color 0.2s}
 .nav-links a:hover{color:rgba(250,252,255,0.85)}
-.nav-cta{background:var(--o)!important;color:var(--w)!important;font-weight:500;padding:7px 18px;border-radius:3px;font-size:13px!important}
-.nav-cta:hover{background:var(--od)!important}
+.nav-cta{background:color-mix(in srgb,var(--o) 84%,transparent)!important;color:var(--w)!important;font-weight:500;padding:7px 18px;border-radius:10px;font-size:13px!important}
+.nav-cta:hover{background:color-mix(in srgb,var(--od) 88%,transparent)!important}
 .nav-toggle{display:none;background:transparent;border:none;cursor:pointer;width:36px;height:36px;padding:0;flex-direction:column;justify-content:center;align-items:center;gap:5px}
 .nav-toggle span{display:block;width:20px;height:2px;border-radius:2px;background:var(--w);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1),opacity 0.2s ease}
 nav.menu-open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -134,10 +134,16 @@ body.dark .hero-orb-3{background:radial-gradient(circle,rgba(249,115,22,0.14) 0%
 .hcs-f-bottom{background:#0D0D0D;padding:8px;display:flex;flex-direction:column;align-items:center;gap:3px}
 .hcs-f-qr{background:#fff;border-radius:5px;padding:4px}
 .hcs-f-powered{font-size:6px;color:rgba(255,255,255,0.25)}
-.btn-p{background:var(--o);color:var(--w);font-family:var(--fb);font-weight:500;font-size:14px;padding:12px 28px;border-radius:3px;border:none;cursor:pointer;transition:background 0.2s;text-decoration:none;display:inline-block}
-.btn-p:hover{background:var(--od)}
-.btn-s{background:transparent;color:var(--b);font-family:var(--fb);font-weight:400;font-size:14px;padding:12px 24px;border-radius:3px;border:1px solid var(--w4);cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block}
+.btn-p{background:color-mix(in srgb,var(--o) 84%,transparent);color:var(--w);font-family:var(--fb);font-weight:500;font-size:14px;padding:12px 28px;border-radius:14px;border:none;cursor:pointer;transition:background 0.2s,transform 0.45s cubic-bezier(0.175,0.885,0.32,2.2),box-shadow 0.3s;text-decoration:none;display:inline-block}
+.btn-p:hover{background:color-mix(in srgb,var(--od) 88%,transparent)}
+.btn-s{background:color-mix(in srgb,var(--w) 55%,transparent);color:var(--b);font-family:var(--fb);font-weight:400;font-size:14px;padding:12px 24px;border-radius:14px;border:1px solid var(--w4);cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block}
 .btn-s:hover{border-color:var(--b);color:var(--b)}
+
+/* Liquid glass effect: applied to all CTA buttons (logo, nav links, theme toggle and FAQ buttons are intentionally excluded) */
+.btn-p,.btn-s,.nav-cta,.p-cta,.f-submit,.wa-btn,.demo-giro-btn,.hcv-close{position:relative;isolation:isolate;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 6px 16px rgba(18,35,79,0.14),inset 1px 1px 1px 0 rgba(255,255,255,0.55),inset -1px -1px 1px 0 rgba(255,255,255,0.22)}
+.btn-p::before,.btn-s::before,.nav-cta::before,.p-cta::before,.f-submit::before,.wa-btn::before,.demo-giro-btn::before,.hcv-close::before{content:'';position:absolute;inset:0;z-index:-1;border-radius:inherit;backdrop-filter:blur(2px) url(#glass-distortion);-webkit-backdrop-filter:blur(2px);pointer-events:none}
+.p-cta:hover,.wa-btn:hover{transform:translateY(-1px) scale(1.02)}
+.p-cta:active,.wa-btn:active,.hcv-close:active{transform:scale(0.96)}
 .theme-toggle{background:transparent;border:none;cursor:pointer;color:rgba(250,252,255,0.45);display:flex;align-items:center;justify-content:center;padding:4px;transition:color 0.2s;line-height:0}
 .theme-toggle:hover{color:rgba(250,252,255,0.85)}
 body.dark{--w:#0F1520;--w2:#141D2E;--w3:#1E2D45;--w4:#243455;--b:#E8EEF8;--b2:#C8D4E8;--b3:#A0B4CC;--txt:#E8EEF8;--txt2:#A0B4CC;--txt3:#6A82A0;background:#0F1520;color:#E8EEF8}
@@ -166,7 +172,7 @@ body.dark .paso p{color:#6A82A0}
 body.dark .sec-demo{background:#0F1520;border-top-color:#1E2D45;border-bottom-color:#1E2D45}
 body.dark .demo-ctrl{background:#141D2E;border-color:#1E2D45}
 body.dark .demo-ctrl-label{color:#6A82A0}
-body.dark .demo-giro-btn{background:#0F1520;border-color:#1E2D45;color:#A0B4CC}
+body.dark .demo-giro-btn{background:rgba(15,21,32,0.7);border-color:#1E2D45;color:#A0B4CC}
 body.dark .demo-giro-btn:hover{border-color:#E8EEF8;color:#E8EEF8}
 body.dark .demo-giro-btn.active{background:#F97316;border-color:#F97316;color:#fff}
 body.dark .demo-info-card{background:#141D2E;border-color:#1E2D45}
@@ -284,10 +290,10 @@ body.dark .iph-wallet-plus,body.dark .demo-wallet-plus{background:#2A2A2A;color:
 .p-features{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:1.5rem}
 .p-features li{font-size:12.5px;color:var(--txt2);display:flex;gap:8px;align-items:flex-start;line-height:1.5}
 .p-features li::before{content:'✓';color:var(--o);flex-shrink:0;font-weight:700}
-.p-cta{width:100%;padding:10px;border-radius:3px;font-family:var(--fb);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s;border:1px solid var(--w4);background:transparent;color:var(--txt2)}
+.p-cta{width:100%;padding:10px;border-radius:10px;font-family:var(--fb);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s;border:1px solid var(--w4);background:transparent;color:var(--txt2)}
 .p-cta:hover{border-color:var(--o);color:var(--o)}
-.p-card.feat .p-cta{background:var(--o);color:var(--w);border-color:var(--o)}
-.p-card.feat .p-cta:hover{background:var(--od);border-color:var(--od)}
+.p-card.feat .p-cta{background:color-mix(in srgb,var(--o) 84%,transparent);color:var(--w);border-color:var(--o)}
+.p-card.feat .p-cta:hover{background:color-mix(in srgb,var(--od) 88%,transparent);border-color:var(--od)}
 .sec-ind{background:var(--w);padding:5rem 5%}
 .ind-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--w4);border:1px solid var(--w4);border-radius:6px;overflow:hidden;margin-top:2.5rem}
 .ind-item{background:var(--w);padding:1.5rem 1.2rem;transition:background 0.2s;cursor:pointer}
@@ -329,9 +335,9 @@ body.dark .iph-wallet-plus,body.dark .demo-wallet-plus{background:#2A2A2A;color:
 .f-group input:focus,.f-group select:focus{border-color:var(--o)}
 .f-group input::placeholder{color:rgba(250,252,255,0.2)}
 .f-group select option{background:var(--b2)}
-.f-submit{width:100%;background:var(--o);color:var(--w);font-family:var(--fb);font-size:14px;font-weight:500;padding:12px;border-radius:3px;border:none;cursor:pointer;transition:background 0.2s;margin-top:0.5rem}
-.f-submit:hover{background:var(--od)}
-.wa-btn{display:flex;align-items:center;gap:8px;margin-top:1rem;padding:10px 14px;background:rgba(37,211,102,0.06);border:1px solid rgba(37,211,102,0.15);border-radius:3px;font-size:13px;color:rgba(37,211,102,0.8);text-decoration:none}
+.f-submit{width:100%;background:color-mix(in srgb,var(--o) 84%,transparent);color:var(--w);font-family:var(--fb);font-size:14px;font-weight:500;padding:12px;border-radius:10px;border:none;cursor:pointer;transition:background 0.2s;margin-top:0.5rem}
+.f-submit:hover{background:color-mix(in srgb,var(--od) 88%,transparent)}
+.wa-btn{display:flex;align-items:center;gap:8px;margin-top:1rem;padding:10px 14px;background:rgba(37,211,102,0.06);border:1px solid rgba(37,211,102,0.15);border-radius:10px;font-size:13px;color:rgba(37,211,102,0.8);text-decoration:none}
 footer{background:var(--b2);border-top:1px solid var(--b3);padding:1.5rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
 .f-logo{display:inline-flex;align-items:center;gap:2px}
 .f-logo-txt{font-family:var(--fs);font-size:0.9rem;font-weight:800;color:var(--w)}
@@ -403,7 +409,7 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
 .demo-ctrl { background: var(--w3); border: 1px solid var(--w4); border-radius: var(--r); padding: 1rem 1.2rem; }
 .demo-ctrl-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--txt3); margin-bottom: 0.75rem; }
 .demo-giro-grid { display: flex; flex-wrap: wrap; gap: 6px; }
-.demo-giro-btn { border: 1px solid var(--w4); background: var(--w); border-radius: 20px; padding: 5px 12px; font-size: 12px; font-family: var(--fb); cursor: pointer; color: var(--txt2); transition: all 0.15s; display: flex; align-items: center; gap: 5px; }
+.demo-giro-btn { border: 1px solid var(--w4); background: color-mix(in srgb, var(--w) 55%, transparent); border-radius: 20px; padding: 5px 12px; font-size: 12px; font-family: var(--fb); cursor: pointer; color: var(--txt2); transition: all 0.15s; display: flex; align-items: center; gap: 5px; }
 .demo-giro-btn:hover { border-color: var(--b); color: var(--b); }
 .demo-giro-btn.active { background: var(--b); border-color: var(--b); color: var(--w); }
 .demo-giro-btn svg { flex-shrink: 0; }
@@ -683,7 +689,8 @@ html { scroll-behavior: smooth; }
   .rv { opacity: 1; transform: none; transition: none; }
   .btn-p, .btn-s, .nav-cta, .f-submit,
   .prob-card, .paso, .p-card,
-  .demo-giro-btn, .demo-info-card { transition: none; }
+  .demo-giro-btn, .demo-info-card,
+  .p-cta, .wa-btn, .hcv-close { transition: none; }
   .precios-grid.pv-in .p-card:first-child,
   .precios-grid.pv-in .p-card:last-child,
   .precios-grid.pv-in .p-card.feat { transform: none; }
@@ -736,6 +743,22 @@ body.dark .p-card:not(.feat).p-selected { border-color: #4B7FCC; }
 </style>
 </head>
 <body>
+<svg style="display:none" aria-hidden="true">
+  <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
+    <feTurbulence type="fractalNoise" baseFrequency="0.008 0.03" numOctaves="1" seed="17" result="turbulence"/>
+    <feComponentTransfer in="turbulence" result="mapped">
+      <feFuncR type="gamma" amplitude="1" exponent="10" offset="0.5"/>
+      <feFuncG type="gamma" amplitude="0" exponent="1" offset="0"/>
+      <feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5"/>
+    </feComponentTransfer>
+    <feGaussianBlur in="turbulence" stdDeviation="2" result="softMap"/>
+    <feSpecularLighting in="softMap" surfaceScale="5" specularConstant="1" specularExponent="100" lightingColor="white" result="specLight">
+      <fePointLight x="-200" y="-200" z="300"/>
+    </feSpecularLighting>
+    <feComposite in="specLight" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litImage"/>
+    <feDisplacementMap in="SourceGraphic" in2="softMap" scale="18" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
 
 <nav>
   <a class="logo" href="#hero" style="cursor:pointer;text-decoration:none;">
