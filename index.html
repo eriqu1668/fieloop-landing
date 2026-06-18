@@ -15,15 +15,25 @@
   --fs:'Plus Jakarta Sans',sans-serif;--fb:'Plus Jakarta Sans',sans-serif;
 }
 body{background:var(--w);color:var(--txt);font-family:var(--fb);font-size:15px;line-height:1.6;overflow-x:hidden}
-nav{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px solid var(--b3);padding:0 5%;display:flex;justify-content:space-between;align-items:center;height:60px}
+nav{position:sticky;top:0;z-index:100;background:var(--b);border-bottom:1px solid var(--b3);padding:0 5%;display:flex;justify-content:space-between;align-items:center;height:60px;transition:background 0.35s ease,border-color 0.35s ease,box-shadow 0.35s ease,max-width 0.35s ease,margin 0.35s ease,border-radius 0.35s ease,top 0.35s ease}
+nav.scrolled{background:rgba(18,35,79,0.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:rgba(255,255,255,0.08)}
+@media(min-width:769px){
+  nav.scrolled{top:14px;max-width:920px;margin:0 auto;border-radius:999px;box-shadow:0 10px 32px rgba(18,35,79,0.18);border:1px solid rgba(255,255,255,0.08)}
+}
 .logo{display:inline-flex;align-items:center;gap:2px}
 .logo-txt{font-family:var(--fs);font-size:1.15rem;font-weight:800;color:var(--w);letter-spacing:-0.02em}
 .logo svg{width:52px;height:30px}
 .nav-links{display:flex;gap:24px;align-items:center}
+.nav-links-main{display:flex;gap:24px;align-items:center}
 .nav-links a{font-size:13px;color:rgba(250,252,255,0.45);text-decoration:none;transition:color 0.2s}
 .nav-links a:hover{color:rgba(250,252,255,0.85)}
 .nav-cta{background:var(--o)!important;color:var(--w)!important;font-weight:500;padding:7px 18px;border-radius:3px;font-size:13px!important}
 .nav-cta:hover{background:var(--od)!important}
+.nav-toggle{display:none;background:transparent;border:none;cursor:pointer;width:36px;height:36px;padding:0;flex-direction:column;justify-content:center;align-items:center;gap:5px}
+.nav-toggle span{display:block;width:20px;height:2px;border-radius:2px;background:var(--w);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1),opacity 0.2s ease}
+nav.menu-open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+nav.menu-open .nav-toggle span:nth-child(2){opacity:0}
+nav.menu-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 .hero{background:linear-gradient(135deg,#F5F0E8,#EEE8DC,#F2EDE3);padding:5% 2% 5% 5%;min-height:88vh;display:flex;align-items:center;border-top:none;animation:heroGradient 12s ease infinite;position:relative;overflow:hidden}
 @keyframes heroGradient{0%{background:linear-gradient(135deg,#F5F0E8 0%,#EEE8DC 50%,#F2EDE3 100%)}25%{background:linear-gradient(135deg,#F2EAE0 0%,#EDE5D8 50%,#F5EDE5 100%)}50%{background:linear-gradient(135deg,#EDE5D8 0%,#F5EDE5 50%,#EEE8DC 100%)}75%{background:linear-gradient(135deg,#F0E8DE 0%,#E8E2D6 50%,#F2EAE0 100%)}100%{background:linear-gradient(135deg,#F5F0E8 0%,#EEE8DC 50%,#F2EDE3 100%)}}
 .hero-deco,.hero-deco2{display:none}
@@ -127,6 +137,8 @@ body.dark .hero-orb-3{background:radial-gradient(circle,rgba(249,115,22,0.14) 0%
 .theme-toggle:hover{color:rgba(250,252,255,0.85)}
 body.dark{--w:#0F1520;--w2:#141D2E;--w3:#1E2D45;--w4:#243455;--b:#E8EEF8;--b2:#C8D4E8;--b3:#A0B4CC;--txt:#E8EEF8;--txt2:#A0B4CC;--txt3:#6A82A0;background:#0F1520;color:#E8EEF8}
 body.dark nav{background:rgba(10,14,26,0.95);border-bottom-color:#1E2D45}
+body.dark nav.scrolled{background:rgba(10,14,26,0.82);border-color:rgba(255,255,255,0.06)}
+body.dark .nav-links-main{background:rgba(10,14,26,0.95);border-bottom-color:#1E2D45}
 body.dark .hero{background:#0F1520}
 body.dark .hero-deco{background:#141D2E}
 body.dark .hero-deco2{background:#1E2D45;opacity:0.3}
@@ -328,7 +340,10 @@ footer p{font-size:12px;color:rgba(250,252,255,0.25)}
   .carousel-dots{display:flex}
 }
 @media(max-width:768px){
-  .nav-links a:not(.nav-cta){display:none}
+  .nav-toggle{display:flex}
+  .nav-links-main{position:absolute;top:60px;left:0;right:0;flex-direction:column;align-items:flex-start;gap:2px;background:var(--b);border-bottom:1px solid var(--b3);padding:8px 5% 14px;opacity:0;visibility:hidden;transform:scale(0.95);transform-origin:top center;transition:opacity 0.18s ease,transform 0.18s ease,visibility 0.18s;pointer-events:none}
+  nav.menu-open .nav-links-main{opacity:1;visibility:visible;transform:scale(1);pointer-events:auto}
+  .nav-links-main a{display:block;width:100%;padding:12px 0;font-size:14px}
   .hero{padding:3rem 5% 2.5rem;min-height:auto}
   .hero-inner{grid-template-columns:1fr}
   .hero-iphone{transform:none}
@@ -668,6 +683,7 @@ html { scroll-behavior: smooth; }
   .precios-grid.pv-in .p-card:last-child,
   .precios-grid.pv-in .p-card.feat { transform: none; }
   .precios-grid .p-card.p-selected { transform: none; transition: none; }
+  nav, .nav-toggle span, .nav-links-main { transition: none; }
 }
 
 /* --- Precios: card selection --- */
@@ -722,14 +738,19 @@ body.dark .p-card:not(.feat).p-selected { border-color: #4B7FCC; }
     <span class="logo-txt">p</span>
   </a>
   <div class="nav-links">
-    <a href="#como">¿Cómo funciona?</a>
-    <a href="#precios">Precios</a>
-    <a href="#faq">FAQs</a>
+    <div class="nav-links-main" id="navLinksMain">
+      <a href="#como">¿Cómo funciona?</a>
+      <a href="#precios">Precios</a>
+      <a href="#faq">FAQs</a>
+    </div>
     <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar a modo oscuro">
       <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     </button>
     <a href="#contacto" class="nav-cta">Demo gratis</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinksMain">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -1371,6 +1392,50 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
 })();
 </script>
 
+<script>
+/* Sticky header scroll-shrink pill + mobile menu toggle */
+(function(){
+  var nav = document.querySelector('nav');
+  var toggle = document.getElementById('navToggle');
+  var panel = document.getElementById('navLinksMain');
+  if (!nav || !toggle || !panel) return;
+
+  var menuOpen = false;
+
+  function syncScrolled(){
+    nav.classList.toggle('scrolled', window.scrollY > 10 && !menuOpen);
+  }
+
+  function setMenuOpen(open){
+    menuOpen = open;
+    nav.classList.toggle('menu-open', menuOpen);
+    toggle.setAttribute('aria-expanded', menuOpen ? 'true' : 'false');
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    syncScrolled();
+  }
+
+  toggle.addEventListener('click', function(){
+    setMenuOpen(!menuOpen);
+  });
+
+  panel.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ setMenuOpen(false); });
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && menuOpen) setMenuOpen(false);
+  });
+
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){ syncScrolled(); ticking = false; });
+  });
+
+  syncScrolled();
+})();
+</script>
 
 <script>
 /* Premium scroll-reveal via IntersectionObserver */
