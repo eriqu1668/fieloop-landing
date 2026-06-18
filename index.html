@@ -53,6 +53,10 @@ body.dark .hero-orb-3{background:radial-gradient(circle,rgba(249,115,22,0.14) 0%
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
 .hero-h1{font-family:var(--fs);font-size:clamp(1.9rem,3vw,3rem);font-weight:800;line-height:1.0;letter-spacing:-0.03em;color:var(--b);margin-bottom:1.2rem}
 .hero-h1 em{font-style:normal;color:var(--o)}
+.hero-rotate{position:relative;display:inline-block;overflow:hidden;height:1em;vertical-align:bottom;transition:width 0.35s ease}
+.hr-word{position:absolute;left:0;top:0;white-space:nowrap;transform:translateY(150%);opacity:0;transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1),opacity 0.4s ease,font-size 0.35s ease}
+.hr-word.hr-active{transform:translateY(0);opacity:1}
+.hr-word.hr-prev{transform:translateY(-150%);opacity:0}
 .hero-sub{font-size:1rem;color:var(--txt2);max-width:420px;font-weight:300;margin-bottom:1.5rem;line-height:1.75}
 .hero-btn{display:inline-block;margin-bottom:0.75rem}
 .hero-note{font-size:12px;color:var(--b);margin-bottom:1rem;font-weight:600}
@@ -684,6 +688,7 @@ html { scroll-behavior: smooth; }
   .precios-grid.pv-in .p-card.feat { transform: none; }
   .precios-grid .p-card.p-selected { transform: none; transition: none; }
   nav, .nav-toggle span, .nav-links-main { transition: none; }
+  .hr-word { transition: none; }
 }
 
 /* --- Precios: card selection --- */
@@ -761,7 +766,7 @@ body.dark .p-card:not(.feat).p-selected { border-color: #4B7FCC; }
   <div class="hero-inner">
     <div class="hero-text">
       <div class="hero-tag">Lealtad digital · México</div>
-      <h1 class="hero-h1">Convierte clientes<br>en <em>fans.</em></h1>
+      <h1 class="hero-h1"><span id="heroRotatePrefix">Convierte </span><span class="hero-rotate" id="heroRotate"><span class="hr-word">clientes</span><span class="hr-word">desconocidos</span><span class="hr-word">visitantes</span><span class="hr-word">compradores</span></span><br>en <em>fans.</em></h1>
       <p class="hero-sub">Tu programa de lealtad en Apple Wallet y Google Wallet, sin papel, sin apps, con la identidad de tu marca.</p>
       <a href="#contacto" class="btn-p hero-btn">Quiero mi demo gratis →</a>
       <div class="hero-note">Primer mes gratis · Sin contratos anuales · Activo en menos de 48 horas</div>
@@ -1434,6 +1439,66 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
   });
 
   syncScrolled();
+})();
+</script>
+
+<script>
+/* Rotating hero word: clientes -> desconocidos -> visitantes -> compradores */
+(function(){
+  var wrap = document.getElementById('heroRotate');
+  var prefix = document.getElementById('heroRotatePrefix');
+  var h1 = document.querySelector('.hero-h1');
+  if (!wrap || !prefix || !h1) return;
+  var words = Array.prototype.slice.call(wrap.querySelectorAll('.hr-word'));
+  if (!words.length) return;
+  var idx = 0;
+  var MIN_SCALE = 0.62;
+  var canvas = document.createElement('canvas');
+  var ctx = canvas.getContext('2d');
+
+  function textWidth(text, fontSizePx, cs){
+    var spacing = parseFloat(cs.letterSpacing) || 0;
+    ctx.font = cs.fontWeight + ' ' + fontSizePx + 'px ' + cs.fontFamily;
+    return ctx.measureText(text).width + spacing * text.length;
+  }
+
+  function render(){
+    words.forEach(function(w){
+      w.classList.remove('hr-active', 'hr-prev');
+      w.style.fontSize = '';
+    });
+    var active = words[idx];
+    active.classList.add('hr-active');
+    words.forEach(function(w, i){ if (i < idx) w.classList.add('hr-prev'); });
+
+    var cs = getComputedStyle(h1);
+    var fontSizePx = parseFloat(cs.fontSize);
+    var prefixWidth = textWidth(prefix.textContent, fontSizePx, cs);
+    var naturalWidth = textWidth(active.textContent, fontSizePx, cs);
+    var available = h1.getBoundingClientRect().width - prefixWidth - 6;
+    var scale = 1;
+    if (naturalWidth > available && available > 0) {
+      scale = Math.max(MIN_SCALE, (available / naturalWidth) * 0.96);
+      active.style.fontSize = (scale * 100) + '%';
+    }
+    wrap.style.width = (naturalWidth * scale) + 'px';
+  }
+
+  render();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
+
+  var resizeTimer = null;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(render, 120);
+  });
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  setInterval(function(){
+    idx = (idx + 1) % words.length;
+    render();
+  }, 2400);
 })();
 </script>
 
