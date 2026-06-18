@@ -102,8 +102,8 @@ body.dark .hero-orb-3{background:radial-gradient(circle,rgba(249,115,22,0.14) 0%
 .hcv-img{display:block;width:100%;transform-origin:left center;filter:drop-shadow(0 18px 50px rgba(0,0,0,0.32))}
 .hcv-img.macos-open{animation:macOSOpen 0.46s cubic-bezier(0.34,1.45,0.64,1) forwards}
 @keyframes macOSOpen{0%{transform:translate(var(--fly-x,-180px),var(--fly-y,0)) scale(0.10);opacity:0}55%{opacity:1}100%{transform:translate(0,0) scale(1);opacity:1}}
-.hcv-close{position:absolute;top:-14px;left:-14px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.48);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;transition:background 0.2s,transform 0.15s;z-index:5;flex-shrink:0}
-.hcv-close:hover{background:rgba(0,0,0,0.72);transform:scale(1.1)}
+.hcv-close{position:absolute;top:-6px;left:-6px;width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.06);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--txt2);opacity:0.7;transition:background 0.2s,opacity 0.2s,transform 0.15s;z-index:5;flex-shrink:0}
+.hcv-close:hover{background:rgba(0,0,0,0.12);opacity:1;transform:scale(1.1)}
 .iph-hotspot{position:absolute;cursor:pointer;border-radius:8px;z-index:5;left:13%;width:74%;transition:transform 0.22s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.22s}
 .iph-hotspot:hover{cursor:pointer;z-index:6}
 .iph-banner{position:absolute;left:6%;width:88%;pointer-events:none;opacity:0;z-index:10;border-radius:10px;overflow:hidden;transition:opacity 0.15s}
@@ -139,9 +139,8 @@ body.dark .hero-orb-3{background:radial-gradient(circle,rgba(249,115,22,0.14) 0%
 .btn-s:hover{border-color:var(--b);color:var(--b)}
 
 /* Liquid glass effect: applied to all CTA buttons (logo, nav links, theme toggle and FAQ buttons are intentionally excluded) */
-.btn-p,.btn-s,.nav-cta,.p-cta,.f-submit,.wa-btn,.demo-giro-btn,.hcv-close{position:relative;isolation:isolate;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 6px 16px rgba(18,35,79,0.14),inset 1px 1px 1px 0 rgba(255,255,255,0.55),inset -1px -1px 1px 0 rgba(255,255,255,0.22)}
-.hcv-close{position:absolute}
-.btn-p::before,.btn-s::before,.nav-cta::before,.p-cta::before,.f-submit::before,.wa-btn::before,.demo-giro-btn::before,.hcv-close::before{content:'';position:absolute;inset:0;z-index:-1;border-radius:inherit;backdrop-filter:blur(2px) url(#glass-distortion);-webkit-backdrop-filter:blur(2px);pointer-events:none}
+.btn-p,.btn-s,.nav-cta,.p-cta,.f-submit,.wa-btn,.demo-giro-btn{position:relative;isolation:isolate;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 6px 16px rgba(18,35,79,0.14),inset 1px 1px 1px 0 rgba(255,255,255,0.55),inset -1px -1px 1px 0 rgba(255,255,255,0.22)}
+.btn-p::before,.btn-s::before,.nav-cta::before,.p-cta::before,.f-submit::before,.wa-btn::before,.demo-giro-btn::before{content:'';position:absolute;inset:0;z-index:-1;border-radius:inherit;backdrop-filter:blur(2px) url(#glass-distortion);-webkit-backdrop-filter:blur(2px);pointer-events:none}
 .p-cta:hover,.wa-btn:hover{transform:translateY(-1px) scale(1.02)}
 .p-cta:active,.wa-btn:active,.hcv-close:active{transform:scale(0.96)}
 .theme-toggle{background:transparent;border:none;cursor:pointer;color:rgba(250,252,255,0.45);display:flex;align-items:center;justify-content:center;padding:4px;transition:color 0.2s;line-height:0}
