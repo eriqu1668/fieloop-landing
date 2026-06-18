@@ -1648,6 +1648,7 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
       {name:'Lavanda',card:'https://raw.githubusercontent.com/eriqu1668/fieloop-landing/main/Card-Lavanda.png',banner:'https://raw.githubusercontent.com/eriqu1668/fieloop-landing/main/Banner-Lavanda.png?v=1'},
       {name:'Verde Vida',card:'https://raw.githubusercontent.com/eriqu1668/fieloop-landing/main/Card-VerdeVida.png',banner:'https://raw.githubusercontent.com/eriqu1668/fieloop-landing/main/Banner-VerdeVida.png?v=1'}
     ];
+    cards.forEach(function(c){ var pre=new Image(); pre.src=c.banner; });
     var viewer=document.getElementById('heroCardViewer');
     var display=document.getElementById('hcvDisplay');
     var img=document.getElementById('hcvImg');
