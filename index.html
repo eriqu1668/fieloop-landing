@@ -47,7 +47,7 @@ body.dark .hero-orb-3{background:radial-gradient(circle,rgba(249,115,22,0.14) 0%
 @keyframes orbDrift1{0%,100%{transform:translate(0,0) scale(1)}35%{transform:translate(-28px,22px) scale(1.06)}70%{transform:translate(18px,-26px) scale(0.96)}}
 @keyframes orbDrift2{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(36px,-18px) scale(1.09)}75%{transform:translate(-22px,28px) scale(0.94)}}
 @keyframes orbDrift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(22px,-38px) scale(1.05)}}
-.hero-inner{display:grid;grid-template-columns:minmax(420px,1fr) auto auto;gap:1rem;align-items:center;width:100%;position:relative;z-index:1}
+.hero-inner{display:grid;grid-template-columns:minmax(500px,1fr) auto auto;gap:1rem;align-items:center;width:100%;position:relative;z-index:1}
 .hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--o);border:1px solid var(--obr);padding:5px 14px;border-radius:2px;margin-bottom:1.5rem;background:var(--ob)}
 .hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--o);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
@@ -1452,7 +1452,6 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
   var words = Array.prototype.slice.call(wrap.querySelectorAll('.hr-word'));
   if (!words.length) return;
   var idx = 0;
-  var MIN_SCALE = 0.62;
   var canvas = document.createElement('canvas');
   var ctx = canvas.getContext('2d');
 
@@ -1465,7 +1464,6 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
   function render(){
     words.forEach(function(w){
       w.classList.remove('hr-active', 'hr-prev');
-      w.style.fontSize = '';
     });
     var active = words[idx];
     active.classList.add('hr-active');
@@ -1473,15 +1471,8 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
 
     var cs = getComputedStyle(h1);
     var fontSizePx = parseFloat(cs.fontSize);
-    var prefixWidth = textWidth(prefix.textContent, fontSizePx, cs);
     var naturalWidth = textWidth(active.textContent, fontSizePx, cs);
-    var available = h1.getBoundingClientRect().width - prefixWidth - 6;
-    var scale = 1;
-    if (naturalWidth > available && available > 0) {
-      scale = Math.max(MIN_SCALE, (available / naturalWidth) * 0.96);
-      active.style.fontSize = (scale * 100) + '%';
-    }
-    wrap.style.width = (naturalWidth * scale) + 'px';
+    wrap.style.width = naturalWidth + 'px';
   }
 
   render();
